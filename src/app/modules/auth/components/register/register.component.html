@@ -1,0 +1,51 @@
+<div class="sign-up-page" (click)="closeModal($event)">
+    <div class="wrapper" #modal>
+        <h1>Sign up</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="forms-controls">
+                    <input 
+                        type="text"
+                        class="input-form"
+                        placeholder="Username"
+                        formControlName="userName">
+                        <div *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched" class="error-message">UserName must be (min-1) and (max-20) !</div>
+                        
+                    <input 
+                        type="text"
+                        class="input-form"
+                        placeholder="FirstName"
+                        formControlName="firstName">
+                        <div *ngIf="form.get('firstName')?.invalid && form.get('firstName')?.touched" class="error-message">Firstname must be (min-1) and (max-20) !</div>
+
+                    <input 
+                        type="text"
+                        class="input-form"
+                        placeholder="LastName"
+                        formControlName="lastName">
+                        <div *ngIf="form.get('lastName')?.invalid && form.get('lastName')?.touched" class="error-message">Lastname must be (min-1) and (max-20) !</div>
+
+                    <input
+                        type="text"
+                        class="input-form"
+                        placeholder="About me"
+                        formControlName="aboutMe">
+                        <div *ngIf="form.get('aboutMe')?.invalid && form.get('aboutMe')?.touched" class="error-message">About me must be max-600 !</div>
+                        
+                    <input 
+                        type="password"
+                        class="input-form"
+                        placeholder="Password"
+                        formControlName="password">
+                        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">Password must be min-4 !</div>
+
+                <div class="error-message">{{errorMessage}}</div>
+                <button type="submit" [disabled]="form.invalid" *ngIf="!isLoading">Sign up</button>
+                <app-loading-spinner [isOpen]="isLoading" [localUsing]="true"></app-loading-spinner>
+            </div>
+        </form>
+        <div class="link-wrapper">
+            Have an account?
+            <a (click)="openLogin()">Login</a>
+        </div>
+    </div>
+</div>

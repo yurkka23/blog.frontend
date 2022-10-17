@@ -1,0 +1,30 @@
+<div class="wrapper">
+    <div>
+    <div class="edit-profile" (click)="openEditProfile(currentUser)">
+        <div class="img">
+            <img src="../../../../../assets/colorProfile1.png" alt="userImage">
+        </div>
+        <div class="description" >
+            <h2>My Acount</h2>
+            <p>Edit your personal information or change your image.</p>
+        </div>
+        <mat-icon>arrow_circle_right</mat-icon>
+
+    </div>
+    <div class="edit-profile" (click)="openMyArticles()">
+        <div class="img">
+            <img src="../../../../../assets/article.jpg" alt="article icon">
+        </div>
+        <div class="description" >
+            <h2>My articles</h2>
+            <p>Watch or edit your articles.</p>
+        </div>
+        <mat-icon>arrow_circle_right</mat-icon>
+    </div>
+    </div>  
+    <div class="about-me">
+        <h3>About me:</h3>
+       <p>{{currentUser.aboutMe}}</p> 
+    </div>
+</div>
+<app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <div class="wrapper-users">
+        <div class="search-post">
+            <div class="search-wrapper">
+                <mat-icon class="icon">search</mat-icon>  
+                <input  class="search-input" type="text" placeholder="Search user by username..." [formControl]="searchInput">
+            </div>
+        </div>
+        <app-loading-spinner [isOpen]="isLoadingSearch" [localUsing]="true"></app-loading-spinner>
+        <div class="list-user" *ngIf="!isLoadingSearch">
+            <app-card-user  *ngFor="let user of users" [userData]="user"  (reloadDataEvent)="reloadData()"></app-card-user>
+        </div>
+    </div>
+    <div class="list-admins">
+        <h1>List admins:</h1>
+        <app-card-user class="admin"  *ngFor="let admin of admins" [userData]="admin" ></app-card-user>
+    </div>
+</div>

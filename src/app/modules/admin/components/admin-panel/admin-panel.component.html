@@ -1,0 +1,29 @@
+<div class="wrapper">
+   <div class="side-bar">
+        <div class="info">
+            <div class="image">
+                <img src="../../../../../assets/admin.png" alt="admin">
+            </div>
+            <div class="name">
+                Admin Panel
+            </div>
+        </div>
+        <div class="links">
+            <div  routerLink="./dashboard" routerLinkActive="active" class="link" >
+                <mat-icon>dashboard</mat-icon>
+                Dashboard
+            </div>
+            <div routerLink="./verify-article" routerLinkActive="active" class="link">
+                <mat-icon>verified</mat-icon>
+                Verify article
+            </div>
+            <div routerLink="./add-admin" routerLinkActive="active" class="link">
+                <mat-icon>person_add</mat-icon>
+                Add admin
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+</div>

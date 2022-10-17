@@ -1,0 +1,20 @@
+.wrapper{
+    background-color: rgba(227, 217, 217, 0.1);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    z-index: 3;
+    backdrop-filter: blur(15px);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .spinner{
+        z-index: 4;
+    }
+}
+.wrapper-local{
+    display: flex;
+    justify-content: center;
+    margin: 15vh 0;
+}

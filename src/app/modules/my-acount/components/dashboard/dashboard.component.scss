@@ -1,0 +1,73 @@
+.wrapper{
+    display: flex;
+    padding: 4vw;
+    div{
+        width: 50%;
+    }
+    .edit-profile{
+        margin: 2vw 0;
+        width: 90%;
+        height: 16vh;
+        padding: 2vw;
+        border: 1px solid rgb(160, 158, 158);
+        box-shadow: 2px 8px 8px rgb(196, 195, 193);
+        display: flex;
+        align-items: center;
+        border-radius: 10px;
+        &:hover{
+            background-color: aliceblue;
+            cursor: pointer;
+            box-shadow: none;
+            transition: 0.5s ease-in-out;
+        }
+        .img{
+            height: 5vw;
+            width: 5vw;
+            border-radius: 100%;
+            padding: 1vw;
+        }
+        .description{
+            margin-left: 10px;
+            h2{
+                font-weight: 600;
+                font-size: 1.7vw;
+                margin-bottom: 10px;
+            }
+            p{
+                font-size: 1.2vw;
+                color: rgb(100, 99, 99);
+                line-height: 120%;
+            }
+        }
+        mat-icon{
+            color: rgb(185, 3, 246);
+            font-size: 3vw;
+            padding: 2vw;
+            margin-bottom: 2vw;
+            margin-left: -2vw;
+        }
+    }
+    .about-me{
+        border: 1px solid rgb(160, 158, 158);
+        padding: 2vw 2.2vw;
+        margin-left: 5vw;
+        max-width: 60%;
+        height: 60vh;
+        border-radius: 10px;
+        h3{
+            font-weight: 500;
+            font-size: 1.7vw;
+        }
+        p{
+            font-size: 1.3vw;
+            line-height: 120%;
+            word-wrap: break-word;
+        }
+    }
+    
+}
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

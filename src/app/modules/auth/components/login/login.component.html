@@ -1,0 +1,30 @@
+<div class="sign-in-page" (click)="closeModal($event)">
+    <div class="wrapper" #modal>
+        <h1>Sign in</h1>
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            <div class="forms-controls">
+                    <input 
+                        type="text"
+                        class="input-form"
+                        placeholder="Username"
+                        formControlName="userName">
+                        <div *ngIf="form.get('userName')?.invalid && form.get('userName')?.touched" class="error-message">UserName must be (min-1) and (max-20) !</div>
+                        
+                    <input 
+                        type="password"
+                        class="input-form"
+                        placeholder="Password"
+                        formControlName="password">
+                        <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="error-message">Password must be min-4 !</div>
+
+                        <div class="error-message">{{errorMessage}}</div>
+                <button type="submit" [disabled]="form.invalid" *ngIf="!isLoading">Sign in</button>
+                <app-loading-spinner [isOpen]="isLoading" [localUsing]="true"></app-loading-spinner>
+            </div>
+        </form>
+        <div class="link-wrapper">
+            Don't have an account?
+            <a (click)="openRegister()">Create acount</a>
+        </div>
+    </div>
+</div>

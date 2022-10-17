@@ -1,0 +1,47 @@
+.wrapper{
+    padding: 2vw;
+    
+    .list-articles{
+        display: flex;
+        gap: 2vw;
+        flex-wrap: wrap;
+        justify-content: center;
+    }
+    .search-post{
+        margin-bottom: 2vh;
+        background-color: rgb(39, 34, 56);
+        padding: 30px;
+        border-radius: 1vw;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        
+        .search-wrapper{
+            display: flex;
+            .search-input{
+                margin-left: 1vw;
+                padding-left: 2.7vw;
+                background-color: transparent;
+                border: none;
+                border-bottom: 3px solid grey;
+                font-size: 1.7vw;
+                padding-bottom: 6px;
+                width: 100%;
+                color: rgb(185, 3, 246); 
+                &:focus{
+                    border: none;
+                    border-bottom: 3px solid rgb(185, 3, 246);
+                    outline: none;
+                }
+            }
+            .icon{
+                color: rgb(165, 166, 167);
+                font-size: 2.3vw;
+                width: 2.3vw;
+                height: 2.3vw;
+                margin-right: -3vw;
+            }
+        }
+        
+    }
+}

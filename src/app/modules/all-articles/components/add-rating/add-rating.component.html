@@ -1,0 +1,20 @@
+<div class="wrapper">
+    <div class="title">
+        <h1 mat-dialog-title>Add rating</h1>
+    </div>
+     
+    <div mat-dialog-content >
+            <mat-radio-group
+                class="radio-group"
+                [(ngModel)]="indexChosen">
+                <mat-radio-button class="radio-button" *ngFor="let option of options; let i = index;" [value]="i">
+                    {{option}}
+                </mat-radio-button>
+            </mat-radio-group>
+
+        <button class="button-close" (click)="addRating()" mat-raised-button color="primary" [disabled]="indexChosen === -1">Add rating</button>
+        <button mat-dialog-close mat-raised-button color="warn" class="button-close">Cancel</button>
+    </div>    
+        
+</div>
+    

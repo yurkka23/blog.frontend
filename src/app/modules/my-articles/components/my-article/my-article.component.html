@@ -1,0 +1,26 @@
+<div class="article">
+    <div class="description">
+        <div (click)="openArticle(article.id)">
+        <div class="state">State: {{article.state | stateArticleToName}} </div>
+        <div class="genre-article">{{ article.genre }}</div>
+        <div class="article-title">{{ article.title }} </div>
+        <div class="content">{{ article.content }}</div>
+        <div class="rating">Rating: {{article.averageRating | number: '1.0-1'}}</div>
+        <div class="date">{{article.createdTime | date}}</div>
+        </div>
+        <div class="buttons">
+            <button (click)="openEditArticle(article)" mat-raised-button color="primary">
+                Edit
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button (click)="openDeleteArticle(article.id)" mat-raised-button color="warn">
+                Delete
+                <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+    </div>
+    <div class="img" (click)="openArticle(article.id)">
+        <img src="{{article.articleImageUrl}}}" alt="{{article.title | slice : 0 : 14}}">
+    </div>
+    
+</div>

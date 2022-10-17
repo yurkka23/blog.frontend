@@ -1,0 +1,63 @@
+.wrapper{
+    padding:3vw 2vw;
+    .title{
+        font-size: 2.4vw;
+        color: rgb(116, 116, 116);
+        margin-bottom: 2.5vw;
+        
+    }
+    .info{
+        padding-left: 1vw;
+        font-size: 1.8vw;
+        div{
+            margin: 1.8vw 0;
+            .contact-info{
+                font-weight: 500;
+                &:hover{
+                    color: rgb(185, 3, 246);
+                }
+            }
+        }
+    }
+
+    .cards{
+        margin: 3vw 0 0 0;
+        display: flex;
+        justify-content: space-between;
+        .card{
+            border: 2px solid grey;
+            border-radius: 10px;
+            margin: 2vw;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding: 1vw;
+            .icon-card{
+                margin-left: -3vw;
+                mat-icon{
+                    font-size: 4vw;
+                    padding:0 3vw 3vw 3vw;
+                    color: rgb(185, 3, 246);
+                }
+            }
+            .title-card{
+                font-size: 1.6vw;
+                width: 150%;
+                font-size: 500;
+                color: rgb(82, 82, 82);
+                line-height: 120%;
+                text-align: center;
+                margin-bottom: 1vw;
+            }
+            .description-card{
+                font-size: 1.6vw;
+                font-size: 400;
+                color: rgb(124, 123, 123);
+                line-height: 120%;
+                text-align: center;
+                margin-bottom: 2vw;
+            }
+        }
+    }
+
+}

@@ -1,0 +1,44 @@
+$h-color: rgb(39, 34, 56);
+
+img{
+    height: 100%;
+    width: 100%;
+}
+.img{
+    width: 100%;
+}
+.all-articles{
+    margin: 20px;
+    padding: 50px 9vw;
+    background-color: rgb(237, 218, 111);
+    border-radius: 90px;
+    .title{
+        display: flex;
+        justify-content: space-between;
+        button{
+            background-color: rgb(185, 3, 246);
+            color: aliceblue;
+            padding: 10px 30px;
+            font-size: 1.3vw;
+            display: flex;
+            align-items: center;
+            mat-icon{
+                margin-right: 5px;
+            }
+        }
+    }
+    h3{
+        margin-top: 20px;
+        color: $h-color;
+        font-size: 4vh;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .list-articles{
+        display: flex;
+        flex-wrap: wrap;
+        justify-content:center;
+        align-items: center;
+        
+    } 
+}
+

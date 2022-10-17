@@ -1,0 +1,21 @@
+.wrapper{
+    padding: 3vw;
+    .greeting{
+        background-color: rgb(51,44,71);
+        padding: 2.4vw;
+        color: aliceblue;
+        border-radius: 30px;
+        font-size: 1.6vw;
+        margin-bottom: 1vw;
+    }
+    .title{
+        font-size: 2.2vw;
+        font-weight: 500;
+        margin: 5vh 0;
+    }
+    .items-wrapper{
+        display: flex;
+        flex-wrap: wrap;
+        gap: 2vw;
+    }
+}

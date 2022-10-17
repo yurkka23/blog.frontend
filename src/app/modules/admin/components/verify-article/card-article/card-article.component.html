@@ -1,0 +1,25 @@
+<div class="card-article">
+    <div class="info-wrapper" (click)="openArticle(article.id)">
+        <div class="img">
+            <img src="{{article.articleImageUrl}}" alt="article image">
+        </div>
+        <div class="author-article">Author: {{article.authorFullName | titlecase}}</div>
+        <div class="article-title">{{ article.title | uppercase }}</div>
+        <div class="genre-article">{{article.genre | titlecase}}</div>
+        <div class="date">{{article.createdTime | date}}</div>
+    </div>
+    
+    <div class="buttons">
+        <button mat-raised-button color="primary" (click)="verifyArticle(article.id)">
+            <mat-icon>verified</mat-icon>
+            Approve
+        </button>
+        <button mat-raised-button color="warn" (click)="rejectArticle(article.id)">
+            <mat-icon>cancel</mat-icon>
+            Reject
+        </button>
+        <button  mat-raised-button color="warn" (click)="deleteArticle(article.id)">
+            <mat-icon>delete</mat-icon>
+        </button>
+    </div>
+</div>

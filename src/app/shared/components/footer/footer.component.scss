@@ -1,0 +1,40 @@
+footer{
+    
+    display: flex;
+    flex-direction: column;
+    
+    .rights{
+        text-align: center;
+        color: aliceblue;
+        margin-bottom: 50px;
+    }
+    .links{
+        display: flex;
+        justify-content: center;
+        margin: 20px;
+        .link-wrapper{
+            width: 70px;
+            height: 70px;
+            background-color: inherit;
+            border-radius: 80px;
+            position: relative;
+            text-align: center;
+            margin: 20px;
+            
+            &:hover{
+                background-color: rgb(64, 57, 84);
+                transition: 0.3s ease-in-out;
+            }
+            .svg{
+                display: block;
+                width: 100%;
+                border-radius: 80px;
+                background-color: inherit;
+               position: absolute;
+               top: 0;
+               left: 0;
+            }
+        }
+        
+    }
+}
