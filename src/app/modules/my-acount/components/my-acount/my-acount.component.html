@@ -1,0 +1,32 @@
+<div class="wrapper">
+    <div class="side-bar">
+        <div class="info">
+            <div class="image-user">
+                <img src="{{imageUser}}" alt="userPhoto">
+            </div>
+            <div class="username">
+                @{{currentUser.userName}}
+            </div>
+            <div class="full-name">{{currentUser.firstName | titlecase}} {{currentUser.lastName | titlecase}}</div>
+        </div>
+        <div class="links">
+            <div  routerLink="./dashboard" routerLinkActive="active" class="link" >
+                <mat-icon>dashboard</mat-icon>
+                Dashboard
+            </div>
+            <div routerLink="./given-ratings" routerLinkActive="active" class="link">
+                <mat-icon>star_rate</mat-icon>
+                Rated Articles
+            </div>
+            <div routerLink="./support" routerLinkActive="active" class="link">
+                <mat-icon>contact_support</mat-icon>
+                Support
+            </div>
+        </div>
+    </div>
+    <div class="content">
+        <router-outlet></router-outlet>
+    </div>
+    
+</div>
+<app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

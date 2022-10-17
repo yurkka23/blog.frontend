@@ -1,0 +1,43 @@
+<div class="wrapper">
+    <div class="title">
+        <h1 mat-dialog-title>Edit Profile Form</h1>
+        <button mat-dialog-close class="button-close"><mat-icon>close</mat-icon></button>
+    </div>
+      
+    <div mat-dialog-content >
+        <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="content-form">
+            
+                <div class="img">
+                    <img [src]="image" alt="chosenPhoto">
+                </div>
+                <input type="file" (change)="uploadFile($event)" style="display: none;" #fileInput>
+                <button type="button" (click)="fileInput.click()" mat-raised-button color="primary" class="buttonAddPhoto">
+                    Change photo*
+                    <mat-icon *ngIf="isPicture">file_download_done</mat-icon>
+                </button>
+           
+            <mat-form-field appearance="outline">
+                <mat-label>UserName</mat-label>
+                <input formControlName="userName" matInput placeholder="UserName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>FirstName</mat-label>
+                <input formControlName="firstName" matInput placeholder="FirstName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>LastName</mat-label>
+                <input formControlName="lastName" matInput placeholder="LastName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>About me</mat-label>
+                <textarea formControlName="aboutMe" rows="10" matInput placeholder="About me" ></textarea>
+            </mat-form-field>
+    
+            <div *ngIf="errorMessage" class="errors">{{ errorMessage }}</div>
+    
+            <button class="button-close" type="submit" mat-raised-button color="primary" [disabled]="userForm.invalid || !isPicture">Edit profile</button>
+        </form>    
+    </div>    
+        
+    </div>
+    

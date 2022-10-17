@@ -1,0 +1,29 @@
+$logo-shadow-color: rgb(156, 248, 10);
+.logo{
+    width: 150px;
+    font-weight: 800;
+    font-size: 130%;
+    margin: 0 3vw;
+    color: aliceblue;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    text-shadow:0 0 10px $logo-shadow-color,
+                0 0 30px $logo-shadow-color,
+                0 0 50px $logo-shadow-color,
+                0 0 70px $logo-shadow-color,
+                0 0 90px $logo-shadow-color;
+    animation: animate 5s linear infinite;
+    &:hover{
+        transition: 0.3s ease-in-out;
+        font-size: 150%;
+        cursor: pointer;
+    }
+}
+
+@keyframes animate{
+    0%{
+        filter: hue-rotate(0deg);
+    }
+    100%{
+        filter: hue-rotate(360deg);
+    }
+}

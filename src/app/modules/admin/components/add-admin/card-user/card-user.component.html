@@ -1,0 +1,13 @@
+<div class="card-user">
+    <div class="img">
+        <img src="{{userImage}}" alt="user image">
+    </div>
+    <div class="username">@{{userData.userName}}</div>
+    <div class="full-name"><span>Full name:</span> {{ userData.firstName | titlecase}} {{userData.lastName | titlecase}}</div>
+    <div class="about-me"><span>About me:</span> {{userData.aboutMe}}</div>
+
+    <button mat-raised-button color="primary" (click)="makeAdmin(userData.id)" *ngIf="userData.role == 1">
+        <mat-icon>person_add_alt</mat-icon>
+        Add to admins
+    </button>
+</div>

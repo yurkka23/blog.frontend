@@ -1,0 +1,15 @@
+<div class="all-articles">
+    <div class="title">
+        <h3>My articles</h3>
+        <button (click)="openCreateArticle()" mat-raised-button ><mat-icon>post_add</mat-icon>Add new article</button>
+    </div>
+
+    <div class="list-articles">
+        <app-my-article *ngFor="let article of myArticles" 
+            [article]="article" 
+            (reloadDataEvent)="reloadData()" >
+        </app-my-article>
+    </div>
+    <app-not-articles *ngIf="countArticles === 0"></app-not-articles>
+</div>
+<app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

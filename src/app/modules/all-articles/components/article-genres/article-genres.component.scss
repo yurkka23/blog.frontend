@@ -1,0 +1,21 @@
+button{
+    background-color: inherit;
+    color: aliceblue;
+    padding: 12px 22px;
+    font-size: 1.1vw;
+    border: 1px solid grey;
+    border-radius: 20px;
+    margin: 8px 12px;
+    font-weight: 100;
+    &:hover{
+        cursor: pointer;
+        border: 1px solid rgb(185, 3, 246);
+    }
+}
+.choosed{
+    background-color: rgb(185, 3, 246);
+    color: rgb(39, 34, 56);;
+    &:hover{
+        color: aliceblue;
+    }
+}

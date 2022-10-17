@@ -1,0 +1,134 @@
+.wrapper{
+    margin: 0 23vw;
+    background-color: aliceblue;
+    border-radius: 50px;
+    padding-bottom: 2vw;
+    .header-post{
+        display: flex;
+        align-items: center;
+        padding: 1vw 3vw;
+       
+        .img-author{
+            width: 7vw;
+            height: 7vw;
+            img{
+                border-radius: 100%;
+            }
+        }
+        .header-info{
+            margin-left: 2vw;
+            .author-name{
+                font-weight: 500;
+                font-size: 2vw;
+                margin-bottom: 1.3vw;
+            }
+            .genre{
+                color: gray;
+                font-size: 1.5vw;
+            }
+        }
+    }
+    .post-body{
+        display: flex;
+        flex-direction: column;
+        margin: 1vw 0;
+        .img-post{
+            width: 48vw;
+            height: 48vw;
+            align-self: center;
+            img{
+                border-radius: 50px;
+            }
+        }
+        .title{
+            font-size: 2.3vw;
+            font-weight: 500;
+            margin-left: 3vw;
+            line-height: 120%;
+        }
+        .rating{
+            font-size: 1.5vw;
+            font-weight: 300;
+            color: gray;
+            line-height: 130%;
+            margin: 1vw 0 1vw 3vw;
+        }
+        .content{
+            font-size: 2vw;
+            margin: 0 3vw;
+            line-height: 130%;
+            word-wrap: break-word;
+        }
+        .createdTime{
+            font-size: 1.6vw;
+            color: gray;
+            margin: 1vw 3vw;
+            line-height: 130%; 
+            
+        }
+    }
+    .add-rating{
+        display: flex;
+        align-items: center;
+        font-size: 1.5vw;
+        padding: 10px 2vw;
+        border-radius: 30px;
+        background-color: gold;
+        margin-left: 2vw;
+        mat-icon{
+            margin-right: 5px;
+        }
+    }
+    .create-comment{
+        margin: 1vw 2vw;
+        background-color: rgb(234, 232, 232);
+        padding: 1vw;
+        border-radius: 10px;
+        form{
+            display: flex;
+            flex-direction: column;
+            font-size: 1.3vw;
+            button{
+                padding: 10px 0;
+                font-size: 1.1vw;
+                
+            }
+        }
+    }
+    .list-comments{
+        margin: 2vw;
+        .comment{
+            display: flex;
+            margin: 1vw;
+            .img-author{
+                height: 5vw;
+                width: 5vw;
+                img{
+                    border-radius: 100%;
+                }
+            }
+            .comment-info{
+                margin-top: 0.5vw;
+                margin-left: 1vw;
+                width: 80%;
+                .author-username{
+                    font-weight: 500;
+                    font-size: 1.3vw;
+                }
+                .message{
+                    font-size: 1vw;
+                    margin-top: 10px;
+                    word-wrap: break-word;
+                    line-height: 120%;
+                }
+            }
+           
+        }
+    }
+}
+
+img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}

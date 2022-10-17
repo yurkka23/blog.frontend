@@ -1,0 +1,22 @@
+<div class="all-articles">
+    <h3>Top Posts</h3>
+    <div class="list-articles">
+        <app-article *ngFor="let art of topArticles" class="top" [article]="art" (click)="openArticle(art.id)"></app-article>
+    </div>
+
+    <h3>All Posts</h3>
+
+    <div class="search-post">
+        <app-article-genres></app-article-genres>
+        <div class="search-wrapper">
+            <mat-icon class="icon">search</mat-icon>  
+            <input  class="search-input" type="text" placeholder="Search article" [formControl]="searchInput">
+        </div>
+    </div>
+    <app-loading-spinner [isOpen]="isLoadingSearch" [localUsing]="true"></app-loading-spinner>
+    <div class="list-articles" *ngIf="!isLoadingSearch">
+        <app-article  *ngFor="let art of articles" [article]="art" (click)="openArticle(art.id)" ></app-article>
+    </div>
+    
+</div>
+<app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

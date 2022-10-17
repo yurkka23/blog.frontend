@@ -1,0 +1,28 @@
+.quantity-wrapper{
+    background-color: rgb(51,44,71);
+    padding: 30px;
+    border-radius: 15px;
+    display: flex;
+    align-items: center;
+    font-size: 2vw;
+    .quantity{
+        display: flex;
+        flex-direction: column;
+        flex-wrap: wrap;
+        color: rgb(195, 204, 212);
+        .number{
+            margin-bottom: 5px;
+        }
+        .description{
+            font-size: 1.7vw;
+            line-height: 120%;
+        }
+    }
+    .icon{
+        margin-left: 15px;
+        .material-icons{
+            color: rgb(185, 3, 246);
+            font-size: 50px;
+        }
+    }
+}

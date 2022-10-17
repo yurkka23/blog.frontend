@@ -1,0 +1,18 @@
+<div class="wrapper">
+    <div class="greeting">
+        Hello, {{fullName | titlecase}}!
+    </div>
+    <app-loading-spinner [isOpen]="isLoading" [localUsing]="true"></app-loading-spinner>
+    <div class="title">
+        Statistics:
+    </div>
+    <div class="items-wrapper" *ngIf="!isLoading">
+        <app-general-statistic-item countItem="{{statistics.countUsers}}" [description]="'users'" [iconName]="'people'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.countAdmins}}" [description]="'admins'" [iconName]="'admin_panel_settings'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.approvedArticles}}" [description]="'approved articles'" [iconName]="'check_box'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.waitingArticles}}" [description]="'waiting articles'" [iconName]="'pending_actions'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.declinedArticles}}" [description]="'declined articles'" [iconName]="'dangerous'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.countComments}}" [description]="'comments'" [iconName]="'comment'"></app-general-statistic-item>
+        <app-general-statistic-item countItem="{{statistics.countRating}}" [description]="'ratings'" [iconName]="'star'"></app-general-statistic-item>
+    </div>
+</div>

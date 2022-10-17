@@ -1,0 +1,48 @@
+.card-user{
+    border: 1px solid black;
+    width: 12vw;
+    height: fit-content;
+    padding: 1.5vw 1vw;
+    border-radius: 4px; 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; 
+    margin: 2vw 0;
+    
+    span{
+        font-weight: 500;
+    }
+    .img{
+        align-self: center;
+        width: 5vw;
+        height: 5vw;
+    }
+   .username{
+    align-self: center;
+    color: rgb(109, 109, 109);
+    font-size: 1vw;
+    margin-top: 0.4vw;
+   }
+   .full-name{
+    font-size: 1.2vw;
+    margin: 0.7vw 0;
+    line-height: 120%;
+    min-height: 5vh;
+   }
+   .about-me{
+    height: 9vh;
+    overflow-y: auto;
+    font-size: 1.1vw;
+    word-wrap: break-word;
+    line-height: 110%;
+   }
+   button{
+    margin-top: 0.4vw;
+   }
+}
+img{
+    height: 100%;
+    width: 100%;
+    border-radius: 100%;
+    object-fit: cover;
+}

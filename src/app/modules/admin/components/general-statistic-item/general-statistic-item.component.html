@@ -1,0 +1,9 @@
+<div class="quantity-wrapper">
+    <div class="quantity">
+        <div class="number">{{countItem}}</div>
+        <div class="description">{{description}}</div> 
+    </div>
+    <div class="icon">
+        <span class="material-icons" [ngStyle]="iconName == 'pending_actions' ? {'color' : 'gold'} : iconName == 'dangerous' ? {'color' : 'red'} : iconName == 'check_box' ? {'color' : 'green'} : {'color' : 'rgb(185, 3, 246);'}" >{{iconName}}</span>
+    </div>
+</div>

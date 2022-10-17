@@ -1,0 +1,6 @@
+<div class="post-genre">
+    <button *ngFor="let genre of listGenres" (click)="chooseGenre(genre)" 
+    [class.choosed]="genre.selected">
+    {{ genre.name }}
+  </button>
+</div>

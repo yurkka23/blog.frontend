@@ -1,0 +1,10 @@
+<div class="article">
+    <div class="genre-article">{{article.genre}}</div>
+    <div class="article-title">{{ article.title | uppercase}}</div>
+    <div class="rating">Rating: {{article.averageRating | number: '1.0-1'}}</div>
+    <div class="author-article">Author: {{article.authorFullName | titlecase}}</div>
+    <div class="time-read">{{article.createdTime | date}} - {{timeToRead | number: '1.0-1'}} min read</div>
+    <div class="img">
+        <img src="{{article.articleImageUrl}}" alt="{{article.title | slice : 0 : 14}}">
+    </div>
+</div>

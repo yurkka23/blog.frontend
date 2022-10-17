@@ -1,0 +1,20 @@
+<header>
+    <nav>
+        <div class="app-components">
+          <app-logo></app-logo>
+          
+            <a routerLink="all-articles" routerLinkActive="active">Main Page</a>
+            <a routerLink="about-us" routerLinkActive="active">About us</a>
+            <a routerLink="my-articles" routerLinkActive="active" *ngIf="isAuthentificated">My articles</a>
+            <a routerLink="admin" routerLinkActive="active" *ngIf="isAuthentificated && isAdmin">Admin <span class="material-icons">admin_panel_settings</span></a>
+        </div>
+    
+        <div class="auth-components">
+          <a routerLink="login" routerLinkActive="active" Class="btn-sign" *ngIf="!isAuthentificated">Sign in<span class="material-icons">login</span></a>
+          <a routerLink="register" routerLinkActive="active" class="btn-sign" *ngIf="!isAuthentificated">Sign up<mat-icon>app_registration</mat-icon></a>
+          <a routerLink="my-acount" routerLinkActive="active" class="btn-sign"  *ngIf="isAuthentificated"><mat-icon>account_circle</mat-icon>My acount</a>
+          <a class="btn-sign" *ngIf="isAuthentificated" (click)="logout()">Logout <span class="material-icons">logout</span></a>
+        </div>
+      </nav>
+    
+</header>

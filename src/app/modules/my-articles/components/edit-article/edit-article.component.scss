@@ -1,0 +1,51 @@
+.wrapper{
+    width: 30vw;
+    
+    .content-form{
+        display: flex;
+        flex-direction: column;
+    }
+    .title{
+        h1{
+            text-align: center;
+        }
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        .button-close{
+            background-color: inherit;
+            border: none;
+            margin-top: -45px;
+            margin-right: -20px;
+            &:hover{
+                color: red;
+                cursor: pointer;
+            }
+        }
+    }
+    .buttonAddPhoto{
+        margin-bottom: 15px;
+    }
+}
+.errors{
+    color: red;
+}
+.img{
+    width: 29vw;
+    height: 29vw;
+    margin-bottom: 10px;
+    img{
+        object-fit:cover;
+        object-position: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 30px;
+        
+    }
+}
+.choosedPhoto{
+    background-color: green;
+}
+
+
+

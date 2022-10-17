@@ -1,0 +1,39 @@
+<div class="wrapper">
+<div class="title">
+    <h1 mat-dialog-title>Add new Article Form</h1>
+    <button mat-dialog-close class="button-close"><mat-icon>close</mat-icon></button>
+</div>
+
+<div mat-dialog-content >
+    <form [formGroup]="articeForm" (ngSubmit)="onSubmit()" class="content-form">
+        
+            <div class="img">
+                <img [src]="image" alt="chosenPhoto">
+            </div>
+            <input type="file" (change)="uploadFile($event)" style="display: none;" #fileInput>
+            <button type="button" (click)="fileInput.click()" mat-raised-button color="primary" class="buttonAddPhoto">
+                Add photo*
+                <mat-icon *ngIf="isPicture">file_download_done</mat-icon>
+            </button>
+       
+        <mat-form-field appearance="outline">
+            <mat-label>Article Title</mat-label>
+            <input formControlName="title" matInput placeholder="Title">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Article Genre</mat-label>
+            <input formControlName="genre" matInput placeholder="Genre">
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Article Content</mat-label>
+            <textarea formControlName="content" rows="10" matInput placeholder="Content" ></textarea>
+        </mat-form-field>
+
+        <div *ngIf="errorMessage" class="errors">{{ errorMessage }}</div>
+        <div *ngIf="errorStatus" class="errors">{{ errorStatus }}</div>
+
+        <button class="button-close" type="submit" mat-raised-button color="primary" [disabled]="articeForm.invalid || !isPicture">Add article</button>
+    </form>    
+</div>    
+    
+</div>

@@ -1,0 +1,13 @@
+<div class="wrapper">
+    <div class="search-post">
+        <div class="search-wrapper">
+            <mat-icon class="icon">search</mat-icon>  
+            <input  class="search-input" type="text" placeholder="Search article" [formControl]="searchInput">
+        </div>
+    </div>
+    <app-loading-spinner [isOpen]="isLoadingSearch" [localUsing]="true"></app-loading-spinner>
+    <div class="list-articles" *ngIf="!isLoadingSearch">
+        <app-card-article  *ngFor="let art of articles" [article]="art"  (reloadDataEvent)="reloadData()"></app-card-article>
+    </div>
+</div>
+
