@@ -1,56 +1,54 @@
-.article{
-   
-    background-color: aliceblue;
-    width: 300px;
-    height: 550px;
-    font-size: 120%;
-    padding: 25px;
-    
-    border-radius: 40px;
-    position: relative;
-    font-size: 1.5vw;
-    color: rgb(41, 41, 41);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    .article-title{
-        word-wrap: break-word;
-        line-height: 110%;
-        min-height: 150px;
-        
-    }
-    &:hover{
-        cursor: pointer;
-        width: 270px;
-        height: 500px;
-        transition: 0.3s ease-in-out;
-    }
-    .genre-article{
-        color: rgb(183, 184, 184);
-        font-size: 1.2vw;
-        margin-bottom: 7px;
-    }
-    .author-article{
-        font-size: 1vw;
-        color: rgb(112, 112, 112);
-        margin-top: 7px;
-    }
-    .time-read{
-        font-size: 0.9vw;
-        color: rgb(163, 163, 163);        
-    }
-    .rating{
-        font-size: 1.3vw;
-    }
+.article {
+  background-color: aliceblue;
+  width: 232px;
+  height: 550px;
+  font-size: 120%;
+  padding: 25px;
+
+  border-radius: 40px;
+  position: relative;
+  font-size: 1.5vw;
+  color: rgb(41, 41, 41);
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  .article-title {
+    word-wrap: break-word;
+    line-height: 110%;
+    min-height: 150px;
+  }
+  &:hover {
+    cursor: pointer;
+    width: 240px;
+    height: 500px;
+    transition: 0.3s ease-in-out;
+  }
+  .genre-article {
+    color: rgb(183, 184, 184);
+    font-size: 1.2vw;
+    margin-bottom: 7px;
+  }
+  .author-article {
+    font-size: 1vw;
+    color: rgb(112, 112, 112);
+    margin-top: 7px;
+  }
+  .time-read {
+    font-size: 0.9vw;
+    color: rgb(163, 163, 163);
+  }
+  .rating {
+    font-size: 1.3vw;
+  }
 }
-img{
-    height: 100%;
-    width: 100%;
-    border-radius: 2vw;
-    object-fit: cover;
+img {
+  height: 100%;
+  width: 100%;
+  border-radius: 2vw;
+  object-fit: cover;
 }
-.img{
-    width: 100%;
-    height: 100%;
-    border-radius: 40px;
+.img {
+  width: 100%;
+  height: 100%;
+  border-radius: 40px;
 }

@@ -1,0 +1,102 @@
+<div class="wrapper">
+  <div class="header" (click)="openUserProfile(recipientId)">
+    <div class="img">
+      <img
+        src="{{
+          (messagesList[0].senderId == recipientId
+            ? messagesList[0].senderPhotoUrl
+            : messagesList[0].recipientPhotoUrl) == ''
+            ? imageUrl
+            : messagesList[0].senderId == recipientId
+            ? messagesList[0].senderPhotoUrl
+            : messagesList[0].recipientPhotoUrl
+        }}"
+        alt="chat photo"
+      />
+    </div>
+    <div class="info">
+      <div
+        class="isOnline"
+        *ngIf="
+          (presenceService.onlineUsers$ | async)?.includes(anotherUsername)
+        "
+      >
+        Online now
+      </div>
+      <div class="name-chat">
+        {{ anotherUsername }}
+      </div>
+    </div>
+  </div>
+  <div class="list-messages" #scroll>
+    <div class="list-wrapper">
+      <div
+        class="message"
+        *ngFor="
+          let message of chatService.messageThread$ | async;
+          let i = index
+        "
+      >
+        <div class="my-message" *ngIf="message.senderId != recipientId">
+          <div class="content">
+            {{ message.content }}
+          </div>
+          <div class="img" (click)="openUserProfile(message.senderId)">
+            <img
+              src="{{
+                message.senderPhotoUrl == '' ? imageUrl : message.senderPhotoUrl
+              }}"
+              alt="my photo"
+            />
+          </div>
+        </div>
+        <div
+          class="another-user-message"
+          *ngIf="message.senderId == recipientId"
+        >
+          <div class="img" (click)="openUserProfile(message.senderId)">
+            <img
+              src="{{
+                message.senderPhotoUrl == '' ? imageUrl : message.senderPhotoUrl
+              }}"
+              alt="my photo"
+            />
+          </div>
+          <div class="content">
+            {{ message.content }}
+          </div>
+        </div>
+        <div
+          class="read-messsages"
+          *ngIf="
+            i == (chatService.messageThread$ | async)!.length - 1 &&
+            message.dateRead != null &&
+            message.senderId != recipientId
+          "
+        >
+          Read {{ message.dateRead | timeago }}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div>
+    <form
+      [formGroup]="messageForm"
+      (ngSubmit)="sendMessage()"
+      class="sent-message"
+    >
+      <textarea
+        matInput
+        cdkTextareaAutosize
+        cdkAutosizeMinRows="3"
+        cdkAutosizeMaxRows="100"
+        placeholder="Sent message..."
+        formControlName="message"
+      ></textarea>
+      <button mat-button class="sent" type="submit">
+        Sent
+        <mat-icon>send</mat-icon>
+      </button>
+    </form>
+  </div>
+</div>

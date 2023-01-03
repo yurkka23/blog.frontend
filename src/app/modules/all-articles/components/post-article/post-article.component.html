@@ -1,70 +1,109 @@
 <div class="wrapper">
-    <div class="header-post">
-        <div class="img-author">
-            <img src="{{authorPhoto}}" alt="author image">
-        </div>
-        <div class="header-info">
-            <div class="author-name">
-                {{article.authorFullName | titlecase}}
-            </div>
-            <div class="genre">
-                {{article.genre | titlecase}}
-            </div>
-        </div>
+  <div class="header-post" (click)="openProfile()">
+    <div class="img-author">
+      <img src="{{ authorPhoto }}" alt="author image" />
+    </div>
+    <div class="header-info">
+      <div class="author-name">
+        {{ article.authorFullName | titlecase }}
+      </div>
+      <div class="genre">
+        {{ article.genre | titlecase }}
+      </div>
+    </div>
+  </div>
+
+  <div class="post-body">
+    <div class="img-post">
+      <img src="{{ article.articleImageUrl }}" alt="post image" />
+    </div>
+    <div class="title">
+      {{ article.title | titlecase }}
+    </div>
+    <div class="rating">
+      Rating: {{ article.averageRating | number : "1.0-1" }}
+    </div>
+    <div class="content">
+      {{ article.content }}
+    </div>
+    <div class="createdTime">
+      {{ article.createdTime | date }}
+    </div>
+  </div>
+
+  <div *ngIf="article.state === 2">
+    <button
+      *ngIf="isAuthentificated && !isUserRatedThisArticle"
+      mat-raised-button
+      class="add-rating"
+      (click)="openAddRating()"
+    >
+      <mat-icon>star_rate</mat-icon>Add rating
+    </button>
+    <div *ngIf="isAuthentificated" class="create-comment">
+      <form
+        [formGroup]="commentForm"
+        (ngSubmit)="addComment()"
+        class="content-form"
+      >
+        <mat-form-field appearance="fill">
+          <mat-label>Add comment</mat-label>
+          <input
+            formControlName="message"
+            matInput
+            #input
+            maxlength="200"
+            placeholder="Add comment.."
+          />
+          <mat-hint
+            >Max 200 characters {{ input.value.length || 0 }}/200</mat-hint
+          >
+        </mat-form-field>
+        <button
+          class="button-close"
+          type="submit"
+          mat-raised-button
+          color="primary"
+          [disabled]="commentForm.invalid"
+        >
+          Add Comment<mat-icon>add_comment</mat-icon>
+        </button>
+      </form>
     </div>
 
-    <div class="post-body">
-        <div class="img-post">
-            <img src="{{article.articleImageUrl}}" alt="post image">
-        </div>
-        <div class="title">
-            {{article.title | titlecase}}
-        </div>
-        <div class="rating">
-            Rating: {{article.averageRating | number: '1.0-1'}}
-        </div>
-        <div class="content">
-            {{article.content}} 
-        </div>
-        <div class="createdTime">
-            {{article.createdTime | date}}
-        </div>
-    </div>
-
-    <div *ngIf="article.state === 2">
-    <button *ngIf="isAuthentificated" mat-raised-button class="add-rating" (click)="openAddRating()"><mat-icon>star_rate</mat-icon>Add rating</button>
-    <div *ngIf="isAuthentificated" class="create-comment" >
-        <form [formGroup]="commentForm" (ngSubmit)="addComment()" class="content-form">
-            <mat-form-field  appearance="fill">
-                <mat-label>Add comment</mat-label>
-                <input formControlName="message" matInput #input maxlength="200" placeholder="Add comment..">
-                <mat-hint>Max 200 characters {{input.value.length || 0}}/200</mat-hint>
-              </mat-form-field>
-        <button class="button-close" type="submit" mat-raised-button color="primary" [disabled]="commentForm.invalid">Add Comment <mat-icon>add_comment</mat-icon></button>
-        </form>    
-    </div>
-
-    <app-loading-spinner [isOpen]="isLoadingLocal" [localUsing]="true"></app-loading-spinner>
+    <app-loading-spinner
+      [isOpen]="isLoadingLocal"
+      [localUsing]="true"
+    ></app-loading-spinner>
 
     <div class="list-comments" *ngIf="!isLoadingLocal">
-        <div class="comment" *ngFor="let comment of commentsList">
-            <div class="img-author">
-                <img src="{{comment.authorImgUrl === '' ? authorCommentPhoto : comment.authorImgUrl}}" alt="author image">
-            </div>
-            <div class="comment-info">
-                <div class="author-username">
-                    @{{comment.authorUserName}}
-                </div>
-                 <div class="message">
-                    {{comment.message}}
-                </div>
-                <button *ngIf="isCurrentUserAuthor || isAdmin" (click)="deleteCommet(comment.id)" mat-raised-button color="warn">
-                    <mat-icon>delete</mat-icon>
-                </button>
-            </div>
-           
+      <div class="comment" *ngFor="let comment of commentsList">
+        <div class="img-author">
+          <img
+            src="{{
+              comment.authorImgUrl === ''
+                ? authorCommentPhoto
+                : comment.authorImgUrl
+            }}"
+            alt="author image"
+          />
         </div>
+        <div class="comment-info">
+          <div class="author-username">@{{ comment.authorUserName }}</div>
+          <div class="message">
+            {{ comment.message }}
+          </div>
+          <button
+            *ngIf="isCurrentUserAuthor || isAdmin"
+            (click)="deleteCommet(comment.id)"
+            mat-raised-button
+            color="warn"
+          >
+            <mat-icon>delete</mat-icon>
+          </button>
+        </div>
+      </div>
     </div>
-    </div>
+  </div>
 </div>
 <app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

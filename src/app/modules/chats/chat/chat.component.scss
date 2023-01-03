@@ -1,0 +1,125 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: rgb(218, 223, 227);
+  border-radius: 20px;
+  .header {
+    margin: 0.3vw;
+    background-color: aliceblue;
+    border-radius: 20px;
+    padding: 0.5vw;
+    display: flex;
+    align-items: center;
+    gap: 1vw;
+    cursor: pointer;
+    .img {
+      width: 3vw;
+      height: 3vw;
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        border-radius: 100%;
+      }
+    }
+    .info {
+      display: flex;
+      flex-direction: column;
+      .isOnline {
+        color: green;
+        font-size: 1vw;
+      }
+      .name-chat {
+        font-size: 1.3vw;
+      }
+    }
+    .name-chat {
+      font-size: 1.3vw;
+    }
+  }
+  .list-messages {
+    height: 62vh;
+    background-color: white;
+    margin: 15px;
+    border-radius: 20px;
+    padding: 0.8vw;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    .read-messsages {
+      color: rgb(125, 127, 129);
+      font-size: 0.9vw;
+      text-align: end;
+      margin-top: 5px;
+    }
+    .message {
+      margin: 0.5vw;
+      width: 96%;
+      height: fit-content;
+      .my-message {
+        display: flex;
+        width: 100%;
+        justify-content: flex-end;
+        align-items: flex-end;
+        .content {
+          background-color: rgb(205, 214, 214);
+          padding: 5px;
+          border-radius: 10px;
+          margin-right: 10px;
+          word-wrap: break-word;
+          max-width: 45%;
+        }
+      }
+      .another-user-message {
+        display: flex;
+        width: 100%;
+        justify-content: flex-start;
+        .content {
+          background-color: rgb(176, 117, 198);
+          padding: 5px;
+          border-radius: 10px;
+          margin-left: 10px;
+          word-wrap: break-word;
+          max-width: 45%;
+        }
+      }
+      .img {
+        &:hover {
+          cursor: pointer;
+        }
+        width: 1.5vw;
+        height: 1.5vw;
+      }
+      img {
+        border-radius: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+    }
+  }
+  .sent-message {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+    textarea {
+      width: 40vw;
+      border: none;
+      outline: none;
+      padding: 10px;
+      border-radius: 10px;
+      background-color: aliceblue;
+    }
+    .sent {
+      background-color: rgb(134, 91, 154);
+      border-radius: 10px;
+      padding: 0 30px;
+      mat-icon {
+        margin-left: 10px;
+      }
+    }
+    margin: 0.5vw 1vw 1vw 1vw;
+  }
+}

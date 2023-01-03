@@ -1,91 +1,95 @@
 $h-color: rgb(39, 34, 56);
 
-img{
-    height: 100%;
-    width: 100%;
+img {
+  height: 100%;
+  width: 100%;
 }
-.img{
-    width: 100%;
+.img {
+  width: 100%;
 }
-.all-articles{
-    margin: 20px;
-    padding: 50px 9vw;
-    background-color: rgb(242, 218, 81);
-    border-radius: 90px;
-    h3{
-        margin-top: 20px;
-        color: $h-color;
-        font-size: 4vh;
-        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
-    }
-    .list-articles{
-        display: flex;
-        flex-wrap: wrap;
-        justify-content:center;
-        align-items: center;
-        
-    }
-    .search-post{
-        margin-bottom: 60px;
-        background-color: $h-color;
-        padding: 30px;
-        border-radius: 40px;
-        display: flex;
-        justify-content: center;
-        flex-direction: column;
-        
-        
-        .search-wrapper{
-            margin-top: 25px;
-            
-            display: flex;
-            .search-input{
-                margin-left: 1vw;
-                padding-left: 2.7vw;
-                background-color: transparent;
-                border: none;
-                border-bottom: 3px solid grey;
-                font-size: 1.7vw;
-                padding-bottom: 6px;
-                width: 100%;
-                color: rgb(185, 3, 246); 
-                &:focus{
-                    border: none;
-                    border-bottom: 3px solid rgb(185, 3, 246);
-                    outline: none;
-                }
-            }
-            .icon{
-                color: rgb(165, 166, 167);
-                font-size: 2.3vw;
-                width: 2.3vw;
-                height: 2.3vw;
-                margin-right: -3vw;
-            }
+.all-articles {
+  margin: 10px;
+  padding: 20px 9vw;
+  background-color: rgb(243, 227, 137);
+  border-radius: 90px;
+  h3 {
+    margin-top: 20px;
+    color: $h-color;
+    font-size: 4vh;
+    font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
+      "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  }
+  .list-articles {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+  }
+  .search-post {
+    margin-bottom: 60px;
+    background-color: $h-color;
+    padding: 30px;
+    border-radius: 40px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+
+    .search-wrapper {
+      margin-top: 25px;
+
+      display: flex;
+      .search-input {
+        margin-left: 1vw;
+        padding-left: 2.7vw;
+        background-color: transparent;
+        border: none;
+        border-bottom: 3px solid grey;
+        font-size: 1.7vw;
+        padding-bottom: 6px;
+        width: 100%;
+        color: rgb(185, 3, 246);
+        &:focus {
+          border: none;
+          border-bottom: 3px solid rgb(185, 3, 246);
+          outline: none;
         }
-        
+      }
+      .icon {
+        color: rgb(165, 166, 167);
+        font-size: 2.3vw;
+        width: 2.3vw;
+        height: 2.3vw;
+        margin-right: -3vw;
+      }
     }
+  }
 }
-.top{
-    &::after{
-        content: 'Top';
-        text-align: center;
-        padding-top: 17px;
-        position: absolute;
-        top: 0;
-        right: 0;
-        width: 70px;
-        height: 50px;
-        font-size: 1.1vw;
-        border-top-right-radius: 40px;
-        border-bottom-left-radius: 90px;
-        color: aliceblue;
-        background: rgb(193,139,230);
-        background: linear-gradient(291deg, rgba(193,139,230,1) 0%, rgba(203,42,231,1) 15%, rgba(226,104,157,1) 30%, rgba(252,176,69,1) 97%);
-    }
+.top {
+  &::after {
+    content: "Top";
+    text-align: center;
+    padding-top: 17px;
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70px;
+    height: 50px;
+    font-size: 1.1vw;
+    border-top-right-radius: 40px;
+    border-bottom-left-radius: 90px;
+    color: aliceblue;
+    background: rgb(193, 139, 230);
+    background: linear-gradient(
+      291deg,
+      rgba(193, 139, 230, 1) 0%,
+      rgba(203, 42, 231, 1) 15%,
+      rgba(226, 104, 157, 1) 30%,
+      rgba(252, 176, 69, 1) 97%
+    );
+  }
 }
 
-app-article{
-    position: relative;
-    margin: 10px;
+app-article {
+  position: relative;
+  margin: 5px;
 }

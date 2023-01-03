@@ -1,0 +1,60 @@
+.wrapper {
+  margin: 2vh 10vw;
+  display: flex;
+  flex-direction: row;
+  position: relative;
+  .side-bar {
+    position: sticky;
+    top: 4vh;
+    background-color: aliceblue;
+    width: 16vw;
+    height: 87vh;
+    margin: 0 3vw;
+    overflow-y: auto;
+    &::-webkit-scrollbar {
+      display: none;
+    }
+    border-radius: 20px;
+    .title {
+      margin: 1.3vw;
+      font-size: 1vw;
+      text-align: center;
+      font-weight: 500;
+    }
+    .no-content {
+      padding: 2vw;
+      font-size: 1vw;
+      text-align: center;
+    }
+    .links {
+      margin: 1vh 0;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      justify-content: space-around;
+      padding-left: 1vw;
+      app-chat-name {
+        margin: 1vw 0;
+        border-radius: 10px;
+        padding-right: 15px;
+        margin-right: 2vw;
+        width: 90%;
+        display: flex;
+        align-items: center;
+        color: rgb(83, 82, 82);
+        &:hover {
+          cursor: pointer;
+          background-color: rgb(219, 216, 220);
+        }
+      }
+      .active {
+        border: 2px solid rgb(205, 53, 255);
+        color: black;
+      }
+    }
+  }
+  .content {
+    width: 50vw;
+    min-height: 80vh;
+  }
+}

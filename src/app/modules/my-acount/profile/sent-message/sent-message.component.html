@@ -1,0 +1,20 @@
+<div class="wrapper">
+  <form
+    [formGroup]="messageForm"
+    (ngSubmit)="sendMessage()"
+    class="sent-message"
+  >
+    <textarea
+      matInput
+      cdkTextareaAutosize
+      cdkAutosizeMinRows="3"
+      cdkAutosizeMaxRows="100"
+      placeholder="Sent message..."
+      formControlName="message"
+    ></textarea>
+    <button mat-button class="sent" type="submit">
+      Sent
+      <mat-icon>send</mat-icon>
+    </button>
+  </form>
+</div>

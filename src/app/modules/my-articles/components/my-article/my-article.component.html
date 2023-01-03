@@ -3,7 +3,7 @@
         <div (click)="openArticle(article.id)">
         <div class="state">State: {{article.state | stateArticleToName}} </div>
         <div class="genre-article">{{ article.genre }}</div>
-        <div class="article-title">{{ article.title }} </div>
+        <div class="article-title">{{ article.title | titlecase}} </div>
         <div class="content">{{ article.content }}</div>
         <div class="rating">Rating: {{article.averageRating | number: '1.0-1'}}</div>
         <div class="date">{{article.createdTime | date}}</div>

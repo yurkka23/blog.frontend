@@ -1,0 +1,12 @@
+<div class="wrapper">
+  <div class="img">
+    <img src="{{ userPhotoUrl }}" alt="User Img" />
+  </div>
+  <div class="info-wrapper">
+    <div class="username">@{{ userInfo.userName }}</div>
+    <div class="fullname">
+      {{ userInfo.firstName | titlecase }} {{ userInfo.lastName | titlecase }}
+    </div>
+    <div class="about-me">{{ userInfo.aboutMe | shortText }}</div>
+  </div>
+</div>

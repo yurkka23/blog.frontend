@@ -1,0 +1,89 @@
+<div class="wrapper">
+  <div class="user-info-wrapper">
+    <div class="user-info">
+      <div class="img">
+        <img src="{{ imageUser }}" alt="userAvatar" />
+      </div>
+      <div>
+        <div class="username">@{{ profileUser.username }}</div>
+        <div class="fullname">
+          {{ profileUser.firstname | titlecase }}
+          {{ profileUser.lastname | titlecase }}
+        </div>
+        <div class="number-articles">
+          Count articles: {{ profileUser.countArticles }}
+        </div>
+        <div
+          class="isOnline"
+          *ngIf="
+            (presenceService.onlineUsers$ | async)?.includes(
+              profileUser.username
+            )
+          "
+        >
+          Online now
+        </div>
+        <div class="followers-section">
+          <div class="followers" (click)="showFollowers()">
+            <div>{{ profileUser.followers }}</div>
+            <div class="description">followers</div>
+          </div>
+          <div class="followers" (click)="showFollowings()">
+            <div>{{ profileUser.following }}</div>
+            <div class="description">following</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="follow-buttons" *ngIf="!isProfileCurrentUser">
+      <button
+        mat-raised-button
+        color="basic"
+        class="follow"
+        *ngIf="profileUser.isCurrentUserSubscribed"
+        (click)="sentMessage()"
+      >
+        Message
+      </button>
+      <button
+        mat-raised-button
+        color="primary"
+        class="follow"
+        *ngIf="!profileUser.isCurrentUserSubscribed"
+        (click)="follow()"
+      >
+        Follow
+      </button>
+      <button
+        mat-raised-button
+        color="warn"
+        class="follow"
+        *ngIf="profileUser.isCurrentUserSubscribed"
+        (click)="unfollow()"
+      >
+        Unfollow
+      </button>
+    </div>
+  </div>
+  <div class="user-description">
+    <h3>About me:</h3>
+    <div class="about-me">
+      {{ profileUser.aboutMe }}
+    </div>
+  </div>
+</div>
+
+<div class="list-articles">
+  <div class="title">{{ profileUser.firstname | titlecase }}`s articles:</div>
+  <div class="list">
+    <app-article
+      *ngFor="let art of userArticles"
+      [article]="art"
+      [isShowAuthor]="false"
+      (click)="openArticle(art.id)"
+    ></app-article>
+  </div>
+</div>
+
+<app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>

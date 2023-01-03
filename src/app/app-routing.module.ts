@@ -13,78 +13,88 @@ import { MyAcountComponent } from './modules/my-acount/components/my-acount/my-a
 import { SupportComponent } from './modules/my-acount/components/support/support.component';
 import { MyArticlesComponent } from './modules/my-articles/components/my-articles/my-articles.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-
-
+import { ProfileComponent } from './modules/my-acount/profile/profile.component';
 
 const routes: Routes = [
   {
     path: 'about-us',
-    component: AboutUsComponent
+    component: AboutUsComponent,
   },
   {
-    path: 'my-acount', 
+    path: 'my-acount',
     canActivate: [LoggedInGuard],
     component: MyAcountComponent,
     children: [
       {
-        path:'',
+        path: '',
         redirectTo: 'dashboard',
-        pathMatch: 'full'
+        pathMatch: 'full',
       },
       {
-        path:'dashboard',
-        component:DashboardComponent
+        path: 'dashboard',
+        component: DashboardComponent,
       },
       {
-        path:'support',
-        component: SupportComponent
+        path: 'support',
+        component: SupportComponent,
       },
       {
         path: 'given-ratings',
-        component: GivenRatingsComponent
-      }
-    ]
+        component: GivenRatingsComponent,
+      },
+    ],
   },
   {
     path: 'my-articles',
-    canActivate: [LoggedInGuard], 
-    component: MyArticlesComponent
+    canActivate: [LoggedInGuard],
+    component: MyArticlesComponent,
   },
   {
     path: 'register',
-    component: RegisterComponent
+    component: RegisterComponent,
   },
   {
     path: 'login',
-    component: LoginComponent
+    component: LoginComponent,
   },
   {
     path: 'admin',
-    canLoad: [ AdminGuard],
-    loadChildren: () => import('./modules/admin/admin.module').then(m => m.AdminModule)
+    canLoad: [AdminGuard],
+    loadChildren: () =>
+      import('./modules/admin/admin.module').then((m) => m.AdminModule),
+  },
+  {
+    path: 'chats',
+    canActivate: [LoggedInGuard],
+    loadChildren: () =>
+      import('./modules/chats/chats.module').then((m) => m.ChatsModule),
   },
   {
     path: 'all-articles',
-    component: AllArticlesComponent
+    component: AllArticlesComponent,
   },
   {
     path: 'all-articles/post-article/:id',
-    component: PostArticleComponent
+    component: PostArticleComponent,
   },
   {
-    path: '', 
+    path: 'user-profile/:id',
+    component: ProfileComponent,
+  },
+  {
+    path: '',
     redirectTo: 'all-articles',
-    pathMatch: 'full'
+    pathMatch: 'full',
   },
   {
     path: '**',
     component: NotFoundComponent,
-    pathMatch: 'full'
-  }
+    pathMatch: 'full',
+  },
 ];
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule]
+  exports: [RouterModule],
 })
-export class AppRoutingModule { }
+export class AppRoutingModule {}

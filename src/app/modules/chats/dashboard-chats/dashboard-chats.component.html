@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="side-bar">
+    <div class="title" *ngIf="listOfChats.chats.length > 0">List of chats:</div>
+    <div class="links" *ngIf="listOfChats.chats.length > 0">
+      <app-chat-name
+        *ngFor="let chat of listOfChats?.chats"
+        [chat]="chat"
+        [routerLink]="['chat', chat.recipientUserId, chat.recipientUsername]"
+        routerLinkActive="active"
+        class="link"
+      ></app-chat-name>
+    </div>
+    <div class="no-content" *ngIf="listOfChats.chats.length == 0">
+      You don't have chats
+    </div>
+  </div>
+  <div class="content">
+    <router-outlet></router-outlet>
+  </div>
+  <app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>
+</div>

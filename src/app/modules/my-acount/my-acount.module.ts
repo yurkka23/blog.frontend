@@ -15,7 +15,12 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatDialogModule } from '@angular/material/dialog';
 import { CardRatingComponent } from './components/given-ratings/card-rating/card-rating.component';
 import { AppRoutingModule } from 'src/app/app-routing.module';
-
+import { ProfileComponent } from './profile/profile.component';
+import { ShowFollowersComponent } from './profile/show-followers/show-followers.component';
+import { ShowFollowingsComponent } from './profile/show-followings/show-followings.component';
+import { UserFollowComponent } from './profile/user-follow/user-follow.component';
+import { AllArticlesModule } from '../all-articles/all-articles.module';
+import { SentMessageComponent } from './profile/sent-message/sent-message.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +29,12 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     SupportComponent,
     GivenRatingsComponent,
     EditProfileComponent,
-    CardRatingComponent
+    CardRatingComponent,
+    ProfileComponent,
+    ShowFollowersComponent,
+    ShowFollowingsComponent,
+    UserFollowComponent,
+    SentMessageComponent,
   ],
   imports: [
     CommonModule,
@@ -37,7 +47,8 @@ import { AppRoutingModule } from 'src/app/app-routing.module';
     FormsModule,
     ReactiveFormsModule,
     MatDialogModule,
-    AppRoutingModule
-  ]
+    AppRoutingModule,
+    AllArticlesModule,
+  ],
 })
-export class MyAcountModule { }
+export class MyAcountModule {}

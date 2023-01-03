@@ -1,0 +1,21 @@
+<div class="wrapper">
+  <div class="img">
+    <img
+      src="{{
+        chat.recipientAvatarUrl == '' ? imageUrl : chat.recipientAvatarUrl
+      }}"
+      alt="photo chat"
+    />
+  </div>
+  <div class="info">
+    <div
+      class="isOnline"
+      *ngIf="
+        (presenceService.onlineUsers$ | async)?.includes(chat.recipientUsername)
+      "
+    >
+      Online now
+    </div>
+    <div class="username">@{{ chat.recipientUsername }}</div>
+  </div>
+</div>

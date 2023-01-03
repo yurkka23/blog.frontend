@@ -10,14 +10,10 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
-
-
+import { ShortTextPipe } from './pipes/short-text.pipe';
 
 @NgModule({
-  declarations: [
-    FooterComponent,
-    LoadingSpinnerComponent
-  ],
+  declarations: [FooterComponent, LoadingSpinnerComponent, ShortTextPipe],
   imports: [
     CommonModule,
     MatIconModule,
@@ -28,8 +24,8 @@ import { MatButtonModule } from '@angular/material/button';
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
-    MatDialogModule
+    MatDialogModule,
   ],
-  exports: [FooterComponent, LoadingSpinnerComponent]
+  exports: [FooterComponent, LoadingSpinnerComponent, ShortTextPipe],
 })
-export class SharedModule { }
+export class SharedModule {}

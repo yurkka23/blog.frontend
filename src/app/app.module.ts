@@ -10,24 +10,23 @@ import { MyAcountModule } from './modules/my-acount/my-acount.module';
 import { MyArticlesModule } from './modules/my-articles/my-articles.module';
 import { AboutUsModule } from './modules/about-us/about-us.module';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
-import {JwtModule} from '@auth0/angular-jwt';
+import { JwtModule } from '@auth0/angular-jwt';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './core/interceptors/auth-interceptor.service';
 import { SharedModule } from './shared/shared.module';
 import { environment } from 'src/environments/environment';
-import { AngularFireModule} from "@angular/fire/compat";
-import { AngularFireStorageModule} from "@angular/fire/compat/storage";
-import { AngularFireAuthModule} from "@angular/fire/compat/auth";
-import { AngularFirestoreModule} from "@angular/fire/compat/firestore";
-import { MatDialogModule } from "@angular/material/dialog";
+import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireStorageModule } from '@angular/fire/compat/storage';
+import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { AngularFirestoreModule } from '@angular/fire/compat/firestore';
+import { MatDialogModule } from '@angular/material/dialog';
 import { NavigationModule } from './modules/navigation/navigation.module';
 import { ToastrModule } from 'ngx-toastr';
+import { MatButtonModule } from '@angular/material/button';
+import { TitleCasePipe } from '@angular/common';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    NotFoundComponent
-  ],
+  declarations: [AppComponent, NotFoundComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -42,10 +41,10 @@ import { ToastrModule } from 'ngx-toastr';
     JwtModule.forRoot({
       config: {
         tokenGetter: () => {
-          return localStorage.getItem("jwtToken");
+          return localStorage.getItem('jwtToken');
         },
-        allowedDomains: ["http://localhost:4200/"],
-      }
+        allowedDomains: ['http://localhost:4200/'],
+      },
     }),
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireStorageModule,
@@ -57,16 +56,18 @@ import { ToastrModule } from 'ngx-toastr';
     ToastrModule.forRoot({
       timeOut: 9000,
       progressBar: true,
-      closeButton: true
-    })
+      closeButton: true,
+    }),
+    MatButtonModule,
+    MatIconModule,
   ],
   providers: [
     {
       provide: HTTP_INTERCEPTORS,
       useClass: AuthInterceptorService,
-      multi: true
-    }
+      multi: true,
+    },
   ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

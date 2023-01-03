@@ -8,55 +8,53 @@ import { ArticlesService } from '../../services/articles.service';
 @Component({
   selector: 'app-article-genres',
   templateUrl: './article-genres.component.html',
-  styleUrls: ['./article-genres.component.scss']
+  styleUrls: ['./article-genres.component.scss'],
 })
 export class ArticleGenresComponent implements OnInit {
-
   listGenres!: Genre[];
   selectedGenre!: Genre;
 
-  constructor(private readonly articleService: ArticlesService,
-    private readonly toastrService: ToastrService) { }
-  
+  constructor(
+    private readonly articleService: ArticlesService,
+    private readonly toastrService: ToastrService
+  ) {}
+
   ngOnInit(): void {
     this.getGenres();
   }
 
-  getGenres(): void{
+  getGenres(): void {
     this.articleService
-    .getGenres(15)
-    .pipe(
-      map( res =>  GenresHelper.createGenreVM(res.genres))
-    )
-    .subscribe({next: res =>{
-      this.listGenres = res;
-    },
-    error: err =>{
-      this.toastrService.error(err.error,'Error with getting  genres');
-    }
-  });
+      .getGenres(15)
+      .pipe(map((res) => GenresHelper.createGenreVM(res.genres)))
+      .subscribe({
+        next: (res) => {
+          this.listGenres = res;
+        },
+        error: (err) => {
+          this.toastrService.error(err.error, 'Error with getting  genres');
+        },
+      });
   }
 
   chooseGenre(genre: Genre) {
     if (this.selectedGenre) {
-      if(this.selectedGenre.name == genre.name && this.selectedGenre.selected)
-      {
+      if (
+        this.selectedGenre.name == genre.name &&
+        this.selectedGenre.selected
+      ) {
         this.selectedGenre.selected = false;
         this.articleService.genreChoosed.next('all');
-      }
-      else
-      {
+      } else {
         this.selectedGenre.selected = false;
         this.selectedGenre = genre;
         genre.selected = !genre.selected;
         this.articleService.genreChoosed.next(genre.name);
       }
-    }
-    else
-    {
+    } else {
       this.selectedGenre = genre;
       genre.selected = !genre.selected;
       this.articleService.genreChoosed.next(genre.name);
-    } 
+    }
   }
 }

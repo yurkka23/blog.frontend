@@ -13,17 +13,18 @@ import { PostCommentInterface } from '../../models/PostComment.interface';
 import { ArticlesService } from '../../services/articles.service';
 import { CommentsService } from '../../services/comments.service';
 import { AddRatingComponent } from '../add-rating/add-rating.component';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-article',
   templateUrl: './post-article.component.html',
-  styleUrls: ['./post-article.component.scss']
+  styleUrls: ['./post-article.component.scss'],
 })
 export class PostArticleComponent implements OnInit, OnDestroy {
-
-  isAuthentificated!:boolean;
-  isAdmin!:boolean;
-  isCurrentUserAuthor: boolean = false; 
+  isAuthentificated!: boolean;
+  isAdmin!: boolean;
+  isUserRatedThisArticle!: boolean;
+  isCurrentUserAuthor: boolean = false;
   articleId!: Guid;
   article!: PostArticleInterface;
   isLoading: boolean = false;
@@ -35,14 +36,17 @@ export class PostArticleComponent implements OnInit, OnDestroy {
   commentForm!: FormGroup;
   private unsubscribe$: Subject<void> = new Subject<void>();
 
-  constructor(private readonly route: ActivatedRoute,
-    private readonly articlesService: ArticlesService, 
-    private readonly matDialog: MatDialog, 
+  constructor(
+    private readonly route: ActivatedRoute,
+    private readonly articlesService: ArticlesService,
+    private readonly matDialog: MatDialog,
     private readonly commentsService: CommentsService,
     private readonly localStorage: LocalStorageService,
     private readonly fb: FormBuilder,
     private readonly authService: AuthService,
-    private readonly toastrService: ToastrService) { }
+    private readonly toastrService: ToastrService,
+    private readonly router: Router
+  ) {}
 
   ngOnInit(): void {
     this.getArticleId();
@@ -56,127 +60,139 @@ export class PostArticleComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  checkAuth(): void{
+  checkAuth(): void {
     this.authService.isUserLogged
-    .pipe(
-      tap((res)=> this.isAuthentificated = res),
-      switchMap(() => this.authService.isAdmin),
-      takeUntil(this.unsubscribe$)
+      .pipe(
+        tap((res) => (this.isAuthentificated = res)),
+        switchMap(() => this.authService.isAdmin),
+        takeUntil(this.unsubscribe$)
       )
-    .subscribe(
-      {
-        next: (res => {
+      .subscribe({
+        next: (res) => {
           this.isAdmin = res;
-        
-        }),
-        error: err => {
+        },
+        error: (err) => {
           this.toastrService.error(err.error, 'Error with auth!');
-        }
-      }
-    )
+        },
+      });
   }
 
-  initializeFrom():void {
+  initializeFrom(): void {
     this.commentForm = this.fb.group({
-      message: this.fb.control('', [Validators.required, Validators.maxLength(200)])
+      message: this.fb.control('', [
+        Validators.required,
+        Validators.maxLength(200),
+      ]),
     });
   }
 
-  getArticleId(): void{
-    const id = this.route.snapshot.paramMap.get('id') ;
-    if(id !== null){
+  getArticleId(): void {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id !== null) {
       this.articleId = Guid.parse(id);
-    }else{
+    } else {
       this.articleId = Guid.createEmpty();
     }
   }
 
-  getArticle(): void{
+  getArticle(): void {
     this.isLoading = true;
-    this.articlesService.getArticleById(this.articleId)
-     .pipe(
-      finalize(() => this.isLoading = false),
-      takeUntil(this.unsubscribe$)
+    this.articlesService
+      .getArticleById(this.articleId)
+      .pipe(
+        finalize(() => (this.isLoading = false)),
+        takeUntil(this.unsubscribe$)
       )
-     .subscribe({next: res =>{
-      this.article = res;
-      if(res.authorImageUrl){
-        this.authorPhoto = res.authorImageUrl;
-      }
-      if(res.createdBy == this.localStorage.getUser()?.id){
-        console.log('true');
-        this.isCurrentUserAuthor = true;
-      }
-    },
-    error: err =>{
-      this.toastrService.error(err.error, 'Error with getting article!')
-    }
-  });
+      .subscribe({
+        next: (res) => {
+          this.article = res;
+          this.isUserRatedThisArticle = res.isRatedByCurrentUser;
+          if (res.authorImageUrl) {
+            this.authorPhoto = res.authorImageUrl;
+          }
+          if (res.createdBy == this.localStorage.getUser()?.id) {
+            this.isCurrentUserAuthor = true;
+          }
+        },
+        error: (err) => {
+          this.toastrService.error(err.error, 'Error with getting article!');
+        },
+      });
   }
 
-  getComments(): void{
+  getComments(): void {
     this.isLoadingLocal = true;
-    this.commentsService.getComments(this.articleId)
-     .pipe(
-      finalize(() => this.isLoadingLocal = false),
-      takeUntil(this.unsubscribe$)
+    this.commentsService
+      .getComments(this.articleId)
+      .pipe(
+        finalize(() => (this.isLoadingLocal = false)),
+        takeUntil(this.unsubscribe$)
       )
-     .subscribe({next: res =>{
-      this.commentsList = res.comments;
-    },
-    error: err =>{
-      this.toastrService.error(err.error, 'Error with getting comments!')
-    }
-  });
+      .subscribe({
+        next: (res) => {
+          this.commentsList = res.comments;
+        },
+        error: (err) => {
+          this.toastrService.error(err.error, 'Error with getting comments!');
+        },
+      });
   }
 
-  openAddRating() : void{
-    this.matDialog.open(AddRatingComponent,{
-      data: this.articleId
-    })
-    .afterClosed()
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe(val => {
-      if(val === 'add'){
-        this.getArticle();
-      }
-    })
+  openAddRating(): void {
+    this.matDialog
+      .open(AddRatingComponent, {
+        data: this.articleId,
+      })
+      .afterClosed()
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe((val) => {
+        if (val === 'add') {
+          this.getArticle();
+        }
+      });
   }
 
-  addComment():void{
+  addComment(): void {
     const request: PostCommentInterface = {
       ArticleId: this.articleId.toString(),
-      Message: this.commentForm.value.message
-    }
+      Message: this.commentForm.value.message,
+    };
 
-    this.commentsService.postComment(request)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe({next: _ =>{
-      this.toastrService.success('You have added a commment', 'Success!')
-      this.commentForm.clearValidators();
-      this.commentForm.markAsUntouched();
-      this.commentForm.reset();
-      this.initializeFrom();
-      this.getComments();
-    },
-    error: err =>{
-      this.toastrService.error(err.error, 'Error with adding comment!')
-      this.errorMessage= err.message;
-    }
-  })
+    this.commentsService
+      .postComment(request)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: (_) => {
+          this.toastrService.success('You have added a commment', 'Success!');
+          this.commentForm.clearValidators();
+          this.commentForm.markAsUntouched();
+          this.commentForm.reset();
+          this.initializeFrom();
+          this.getComments();
+        },
+        error: (err) => {
+          this.toastrService.error(err.error, 'Error with adding comment!');
+          this.errorMessage = err.message;
+        },
+      });
   }
 
-  deleteCommet(id: number):void{
-    this.commentsService.deleteComment(id)
-    .pipe(takeUntil(this.unsubscribe$))
-    .subscribe({next: () =>{
-      this.toastrService.success('You have deleted a commment', 'Success!')
-      this.getComments();
-    },
-    error: err =>{
-      this.toastrService.error(err.error, 'Error with delete comment!')
-    }
-  })
+  deleteCommet(id: number): void {
+    this.commentsService
+      .deleteComment(id)
+      .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+        next: () => {
+          this.toastrService.success('You have deleted a commment', 'Success!');
+          this.getComments();
+        },
+        error: (err) => {
+          this.toastrService.error(err.error, 'Error with delete comment!');
+        },
+      });
   }
 
+  openProfile(): void {
+    this.router.navigate(['user-profile', this.article.authorId]);
+  }
 }

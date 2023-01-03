@@ -1,0 +1,104 @@
+.wrapper {
+  margin: 1vw 2vw;
+  padding: 3vw;
+  border-radius: 2vw;
+  background-color: rgb(255, 242, 169);
+  min-height: 50vh;
+  display: flex;
+  flex-direction: row;
+  .follow-buttons {
+    margin-top: 2vh;
+    display: flex;
+    gap: 2vw;
+    .follow {
+      padding: 0.2vw 2vw;
+    }
+  }
+  .user-info-wrapper {
+    width: 35vw;
+    .user-info {
+      display: flex;
+      gap: 2vw;
+      div {
+        display: flex;
+        flex-direction: column;
+        gap: 0.5vw;
+        .username {
+          font-size: 1vw;
+          color: rgb(127, 126, 130);
+        }
+        .fullname {
+          font-size: 1vw;
+          font-weight: 500;
+        }
+        .registred-at {
+          font-size: 0.8vw;
+        }
+        .number-articles {
+          font-size: 1vw;
+        }
+        .isOnline {
+          color: green;
+          font-size: 1.3vw;
+        }
+        .followers-section {
+          margin-top: 2vh;
+          display: flex;
+          flex-direction: row;
+          gap: 2vw;
+          .followers {
+            cursor: pointer;
+            text-align: center;
+            font-size: 1vw;
+            background-color: aliceblue;
+            padding: 0.7vw 1vw;
+            border-radius: 1vw;
+            .description {
+              font-size: 0.7vw;
+            }
+          }
+        }
+      }
+      .img {
+        width: 13vw;
+        height: 13vw;
+        img {
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+  .user-description {
+    width: 53vw;
+    h3 {
+      font-weight: 600;
+      font-size: 1.5vw;
+    }
+    line-height: 120%;
+    word-wrap: break-word;
+    font-size: 1.2vw;
+  }
+}
+
+.list-articles {
+  margin: 2vw;
+  .title {
+    text-align: center;
+    color: aliceblue;
+    font-size: 1.4vw;
+    margin-bottom: 2vw;
+  }
+
+  .list {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 1.5vw;
+  }
+}
+
+img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

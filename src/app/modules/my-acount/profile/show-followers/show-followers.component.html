@@ -1,0 +1,14 @@
+<div class="wrapper">
+  <div class="no-users" *ngIf="listFollowers.users.length == 0">
+    This user haven't followers!
+  </div>
+  <div class="list-users" *ngIf="listFollowers.users.length > 0">
+    <div class="header">User Followers</div>
+    <app-user-follow
+      *ngFor="let user of listFollowers.users"
+      [userInfo]="user"
+      (click)="showUserProfile(user.id)"
+    >
+    </app-user-follow>
+  </div>
+</div>
