@@ -43,10 +43,16 @@
       Don't have an account?
       <a (click)="openRegister()">Create acount</a>
     </div>
-    <!-- <div class="facebook">
-      <button mat-raised-button color="primary">
+    <div class="facebook">
+      <button mat-raised-button color="primary" (click)="loginWithFacebook()">
         Login with facebook <mat-icon>facebook</mat-icon>
       </button>
-    </div> -->
+      <!-- <button mat-raised-button color="primary" (click)="submitLoginOut()">
+        Logout with facebook <mat-icon>facebook</mat-icon>
+      </button> -->
+      <button mat-raised-button color="primary" (click)="checkStatus()">
+        Check with facebook <mat-icon>facebook</mat-icon>
+      </button>
+    </div>
   </div>
 </div>

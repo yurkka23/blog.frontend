@@ -1,7 +1,14 @@
 <div class="wrapper">
-    <h1>List of articles you rated:</h1>
-    <app-loading-spinner [isOpen]="isLoading" [localUsing]="true"></app-loading-spinner>
-    <div class="list-ratings" *ngIf="!isLoading">
-        <app-card-rating *ngFor="let rating of ratingsList" [ratingInfo]="rating" (click)="openArticle(rating.articleId)"></app-card-rating>
-    </div>
+  <h1>List of articles you rated:</h1>
+  <app-loading-spinner
+    [isOpen]="isLoading"
+    [localUsing]="true"
+  ></app-loading-spinner>
+  <div class="list-ratings" *ngIf="!isLoading">
+    <app-card-rating
+      *ngFor="let rating of ratingsList"
+      [ratingInfo]="rating"
+      (click)="openArticle(rating.articleId)"
+    ></app-card-rating>
+  </div>
 </div>

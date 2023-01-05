@@ -14,6 +14,7 @@ import { Roles } from 'src/app/shared/enums/roles.enum';
 import { ToastrService } from 'ngx-toastr';
 import { PresenceService } from 'src/app/core/services/presence.service';
 import { ChatService } from '../../chats/services/chat.service';
+import { FacebookUserLoginInterface } from '../models/facebookUserLogin.interface';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +57,25 @@ export class AuthService {
   ): Observable<LoginResponseInterface> {
     const url = environment.apiUrl + 'auth/login';
     return this.http.post<LoginResponseInterface>(url, data.user).pipe(
+      map((response) => {
+        const jwtToken = response.jwtToken;
+        const refreshToken = response.refreshToken;
+        this.localStorageService.setJwtToken(jwtToken);
+        this.localStorageService.setRefreshToken(refreshToken);
+        this.localStorageService.setUser(response.user);
+        this.isUserLogged.next(true);
+        this.checkAdmin();
+        this.presenceService.createHubConnection(jwtToken);
+        return response;
+      })
+    );
+  }
+
+  public loginWithFacebook(
+    data: FacebookUserLoginInterface
+  ): Observable<LoginResponseInterface> {
+    const url = environment.apiUrl + 'auth/login-with-facebook';
+    return this.http.post<LoginResponseInterface>(url, data).pipe(
       map((response) => {
         const jwtToken = response.jwtToken;
         const refreshToken = response.refreshToken;

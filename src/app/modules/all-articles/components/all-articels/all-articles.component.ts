@@ -15,6 +15,8 @@ import { SearchService } from 'src/app/shared/services/search.service';
 import { ArticleInterface } from '../../models/Article.interface';
 import { ArticlesService } from '../../services/articles.service';
 
+declare var FB: any;
+
 @Component({
   selector: 'app-all-articles',
   templateUrl: './all-articles.component.html',
@@ -40,11 +42,40 @@ export class AllArticlesComponent implements OnInit, OnDestroy {
     this.getArticles();
     this.searchArticles();
     this.getArticlesByGenre();
+    // this.initFacebookAuth();
+    FB.Event.subscribe('auth.authResponseChange', function (response: any) {
+      console.log('auth.authResponseChange');
+      console.log(response);
+    });
   }
 
   ngOnDestroy(): void {
     this.unsubscribe$.next();
     this.unsubscribe$.complete();
+  }
+  initFacebookAuth(): void {
+    (window as any).fbAsyncInit = function () {
+      FB.init({
+        appId: '670488708108921',
+        cookie: true,
+        xfbml: true,
+        version: 'v15.0',
+      });
+
+      FB.AppEvents.logPageView();
+    };
+
+    (function (d, s, id) {
+      var js: any,
+        fjs: any = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) {
+        return;
+      }
+      js = d.createElement(s);
+      js.id = id;
+      js.src = 'https://connect.facebook.net/en_US/sdk.js';
+      fjs.parentNode.insertBefore(js, fjs);
+    })(document, 'script', 'facebook-jssdk');
   }
 
   getArticlesByGenre(): void {
@@ -126,5 +157,11 @@ export class AllArticlesComponent implements OnInit, OnDestroy {
 
   openArticle(id: Guid): void {
     this.router.navigate(['all-articles/post-article', id]);
+  }
+
+  checkStatus(): void {
+    FB.getLoginStatus(function (response: any) {
+      console.log(response);
+    });
   }
 }
