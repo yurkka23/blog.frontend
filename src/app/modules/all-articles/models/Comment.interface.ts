@@ -1,6 +1,8 @@
-export interface CommentInterface{
-    id: number,
-    message: string,
-    authorUserName: string,
-    authorImgUrl: string
+import { Guid } from 'guid-typescript';
+
+export interface CommentInterface {
+  id: Guid;
+  message: string;
+  authorUserName: string;
+  authorImgUrl: string;
 }

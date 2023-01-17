@@ -177,7 +177,7 @@ export class PostArticleComponent implements OnInit, OnDestroy {
       });
   }
 
-  deleteCommet(id: number): void {
+  deleteCommet(id: Guid): void {
     this.commentsService
       .deleteComment(id)
       .pipe(takeUntil(this.unsubscribe$))

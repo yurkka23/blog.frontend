@@ -7,29 +7,28 @@ import { CommentsInterface } from '../models/Comments.interface';
 import { PostCommentInterface } from '../models/PostComment.interface';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class CommentsService {
+  constructor(private readonly http: HttpClient) {}
 
-  constructor(private readonly http: HttpClient) { }
-  
-  getComments(articleId: Guid): Observable<CommentsInterface>{
+  getComments(articleId: Guid): Observable<CommentsInterface> {
     const url = environment.apiUrl + 'comment/get-comments-by-article';
     let params = new HttpParams().append('articleId', articleId.toString());
 
-    return this.http.get<CommentsInterface>(url, {params});
+    return this.http.get<CommentsInterface>(url, { params });
   }
 
-  postComment(data: PostCommentInterface) : Observable<number> {
+  postComment(data: PostCommentInterface): Observable<Guid> {
     const url = environment.apiUrl + 'comment/create-comment-to-article';
 
-    return this.http.post<number>(url, data);
+    return this.http.post<Guid>(url, data);
   }
-  
-  deleteComment(id: number): Observable<void>{
+
+  deleteComment(id: Guid): Observable<void> {
     const url = environment.apiUrl + 'comment/delete-comment';
     let params = new HttpParams().append('id', id.toString());
 
-    return this.http.delete<void>(url, {params});
+    return this.http.delete<void>(url, { params });
   }
 }

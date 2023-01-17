@@ -35,8 +35,6 @@ export class ChatService {
       .withAutomaticReconnect()
       .build();
 
-    console.log(this.hubConnection);
-
     this.hubConnection.start().catch((error) => console.log(error));
 
     this.hubConnection.on('ReceiveMessageThread', (messages) => {
