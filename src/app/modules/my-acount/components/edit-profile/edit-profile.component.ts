@@ -86,7 +86,6 @@ export class EditProfileComponent implements OnInit, OnDestroy {
       .subscribe({next: url => {
         this.image = url;
         this.isPicture = true;
-        console.log(url);
       },error: err=>{
         this.toastrService.success(err.error,'Error with upload photo')
         this.errorMessage = err.message;

@@ -15,6 +15,7 @@ import { DeleteArticleComponent } from './components/delete-article/delete-artic
 import { EditArticleComponent } from './components/edit-article/edit-article.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { NotArticlesComponent } from './components/not-articles/not-articles.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { NotArticlesComponent } from './components/not-articles/not-articles.com
     FormsModule,
     ReactiveFormsModule,
     MatIconModule,
-    SharedModule
+    SharedModule,
+    MatPaginatorModule
   ]
 })
 export class MyArticlesModule { }

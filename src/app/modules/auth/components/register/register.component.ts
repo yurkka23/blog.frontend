@@ -55,7 +55,6 @@ export class RegisterComponent implements OnInit, OnDestroy {
       user : this.form.value
     }
     this.isLoading = true;
-    console.log("request",request);
     this.authService.register(request)
     .pipe(
       finalize(() => this.isLoading = false),

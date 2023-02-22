@@ -80,7 +80,6 @@ export class PostArticleComponent implements OnInit, OnDestroy {
   initializeFrom(): void {
     this.commentForm = this.fb.group({
       message: this.fb.control('', [
-        Validators.required,
         Validators.maxLength(200),
       ]),
     });
@@ -153,6 +152,9 @@ export class PostArticleComponent implements OnInit, OnDestroy {
   }
 
   addComment(): void {
+    if( this.commentForm.value.message.trim() == ''){
+      return;
+    }
     const request: PostCommentInterface = {
       ArticleId: this.articleId.toString(),
       Message: this.commentForm.value.message,

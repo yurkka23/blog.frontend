@@ -81,6 +81,10 @@
 }
 
 .list-articles {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
   margin: 2vw;
   .title {
     text-align: center;
@@ -102,3 +106,14 @@ img {
   height: 100%;
   object-fit: cover;
 }
+
+.paginator{
+  display: flex;
+  justify-content: center;
+  background-color: aliceblue;
+  font-size: 15px;
+  width: fit-content;
+  border-radius: 20px;
+  margin-top: 20px;
+}
+

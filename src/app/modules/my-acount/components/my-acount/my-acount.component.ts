@@ -48,7 +48,6 @@ export class MyAcountComponent implements OnInit, OnDestroy {
       .subscribe({
         next: (res) => {
           this.currentUser = res;
-          console.log(this.currentUser);
           if (res.imageUserUrl !== '') {
             this.imageUser = res.imageUserUrl;
           }

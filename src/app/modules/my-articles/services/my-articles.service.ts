@@ -3,6 +3,9 @@ import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { PaginatedResult } from '../../all-articles/models/PaginatedResult';
+import { getPaginatedResult } from '../../all-articles/services/pagination-helper.service';
+import { GetMyArticleInterface } from '../models/GetMyArticle.interface';
 import { GetMyArticlesInterface } from '../models/GetMyArticles.interface';
 import { PostArticleInterface } from '../models/PostArticle.interface';
 import { PutArticleInterface } from '../models/PutArticle.interface';
@@ -14,10 +17,14 @@ export class MyArticlesService {
 
   constructor(private readonly http: HttpClient) { }
 
-  getMyArticles(): Observable<GetMyArticlesInterface>{
+  getMyArticles(pageSize: number = 8, pageIndex: number = 0):  Observable<PaginatedResult<GetMyArticleInterface[]>>{
     const url = environment.apiUrl + 'article/get-user-articles';
 
-    return this.http.get<GetMyArticlesInterface>(url);
+    let params = new HttpParams()
+    .append('PageSize', pageSize.toString())
+    .append('PageNumber', pageIndex.toString());
+
+    return getPaginatedResult<GetMyArticleInterface[]>(url, params, this.http);
   }
 
   postMyArticle(data: PostArticleInterface) : Observable<Guid> {

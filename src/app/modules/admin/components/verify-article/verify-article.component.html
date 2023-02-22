@@ -9,5 +9,12 @@
     <div class="list-articles" *ngIf="!isLoadingSearch">
         <app-card-article  *ngFor="let art of articles" [article]="art"  (reloadDataEvent)="reloadData()"></app-card-article>
     </div>
+    <mat-paginator (page)="paginatorEvent($event)"
+                 [length]="totalCount"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageSize]="pageSize"
+                 class="paginator">
+    </mat-paginator>
 </div>
 

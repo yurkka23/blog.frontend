@@ -1,5 +1,6 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
+import { PageEvent } from '@angular/material/paginator';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { debounceTime, finalize, Subject, switchMap, takeUntil, tap } from 'rxjs';
@@ -16,6 +17,11 @@ export class VerifyArticleComponent implements OnInit, OnDestroy {
   articles!: ArticleInterface[];
   searchInput = new FormControl('');
   isLoadingSearch: boolean = false;
+  public totalCount!: number;
+  public pageIndex: number = 0;
+  public pageSize: number = 8;
+  public readonly pageSizeOptions: number[] = [8, 16, 32];
+  private lastSearch: string = "";
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private readonly adminService: AdminService,
@@ -42,7 +48,8 @@ export class VerifyArticleComponent implements OnInit, OnDestroy {
         )
       .subscribe({
       next: res =>{
-        this.articles = res.articles;
+        this.articles = res.result ?? [];
+        this.totalCount = res.pagination?.totalItems ?? 0;
       },
       error: err =>{
         this.toastrService.error(err.error, 'Error with getting articles');
@@ -50,19 +57,21 @@ export class VerifyArticleComponent implements OnInit, OnDestroy {
     });
   }
 
-  searchArticles(): void{
+  searchArticles(pageSize: number = 8, pageIndex: number = 0): void{
     this.searchInput.valueChanges
       .pipe(
         tap(() => this.isLoadingSearch = true),
         debounceTime(500),
         switchMap(val => {
-          return this.adminService.searchWaitingArticles(val?.trim() ? val : '')
+          this.lastSearch = val ?? '';
+          return this.adminService.searchWaitingArticles(val?.trim() ? val : '', pageSize, pageIndex)
         }),
         takeUntil(this.unsubscribe$)
       )
       .subscribe({
       next: res =>{
-        this.articles = res.articles;
+        this.articles = res.result ?? [];
+        this.totalCount = res.pagination?.totalItems ?? 0;
         this.isLoadingSearch = false;
       },
       error: err =>{
@@ -70,8 +79,31 @@ export class VerifyArticleComponent implements OnInit, OnDestroy {
       }
     });
   }
-  
+
+  searchPaginateArticles(searchVal: string ,pageSize: number = 8, pageIndex: number = 0): void {
+     this.adminService.searchWaitingArticles( searchVal, pageSize, pageIndex)
+     .pipe(takeUntil(this.unsubscribe$))
+      .subscribe({
+      next: res =>{
+        this.articles = res.result ?? [];
+        this.totalCount = res.pagination?.totalItems ?? 0;
+        this.isLoadingSearch = false;
+      },
+      error: err =>{
+        this.toastrService.error(err.error, 'Error with searching articles');
+      }
+    });
+  }
+
   reloadData(): void{
     this.getArticles();
+  }
+
+  public paginatorEvent(event: PageEvent): void {
+    this.pageIndex = 0;
+   
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+    this.searchPaginateArticles(this.lastSearch, event.pageSize, event.pageIndex);
   }
 }

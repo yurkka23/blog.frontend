@@ -14,6 +14,10 @@ import { SupportComponent } from './modules/my-acount/components/support/support
 import { MyArticlesComponent } from './modules/my-articles/components/my-articles/my-articles.component';
 import { NotFoundComponent } from './shared/components/not-found/not-found.component';
 import { ProfileComponent } from './modules/my-acount/profile/profile.component';
+import { ShowFollowersComponent } from './modules/my-acount/profile/show-followers/show-followers.component';
+import { ShowFollowingsComponent } from './modules/my-acount/profile/show-followings/show-followings.component';
+import { FollowersComponent } from './modules/my-acount/components/followers/followers.component';
+import { FollowingsComponent } from './modules/my-acount/components/followings/followings.component';
 
 const routes: Routes = [
   {
@@ -42,6 +46,14 @@ const routes: Routes = [
         path: 'given-ratings',
         component: GivenRatingsComponent,
       },
+      {
+        path: 'followers',
+        component: FollowersComponent,
+      },
+      {
+        path: 'followings',
+        component: FollowingsComponent,
+      }
     ],
   },
   {

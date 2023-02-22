@@ -12,6 +12,7 @@ import { CardArticleComponent } from './components/verify-article/card-article/c
 import { MatButtonModule } from '@angular/material/button';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CardUserComponent } from './components/add-admin/card-user/card-user.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
 
 
 @NgModule({
@@ -32,6 +33,7 @@ import { CardUserComponent } from './components/add-admin/card-user/card-user.co
     MatButtonModule,
     FormsModule,
     ReactiveFormsModule,
+    MatPaginatorModule
   ]
 })
 export class AdminModule { }

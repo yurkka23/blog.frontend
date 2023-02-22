@@ -4,11 +4,18 @@
         <button (click)="openCreateArticle()" mat-raised-button ><mat-icon>post_add</mat-icon>Add new article</button>
     </div>
 
-    <div class="list-articles">
+    <div class="list-articles" *ngIf="countArticles > 0">
         <app-my-article *ngFor="let article of myArticles" 
             [article]="article" 
             (reloadDataEvent)="reloadData()" >
         </app-my-article>
+        <mat-paginator (page)="paginatorEvent($event)"
+                 [length]="totalCount"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageSize]="pageSize"
+                 class="paginator">
+        </mat-paginator>
     </div>
     <app-not-articles *ngIf="countArticles === 0"></app-not-articles>
 </div>

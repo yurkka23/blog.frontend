@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Guid } from 'guid-typescript';
 import { ToastrService } from 'ngx-toastr';
@@ -31,6 +32,11 @@ export class ProfileComponent implements OnInit {
   isProfileCurrentUser: boolean = false;
   imageUser: string = '../../../../../assets/noProfile.jpg';
   userArticles!: ArticleInterface[];
+  public totalCount!: number;
+  public pageIndex: number = 0;
+  public pageSize: number = 8;
+  public readonly pageSizeOptions: number[] = [8, 16, 32];
+
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(
@@ -68,23 +74,23 @@ export class ProfileComponent implements OnInit {
     //check Is Profile CurrentUser
     if (Guid.parse(id ? id : Guid.EMPTY) == this.localStorage.getUser()?.id) {
       this.isProfileCurrentUser = true;
-      console.log(this.isProfileCurrentUser);
     } else {
       this.isProfileCurrentUser = false;
     }
   }
 
-  getUserArticles(): void {
+  getUserArticles(pageSize: number = 8, pageIndex: number = 0): void {
     this.isLoading = true;
     this.articlesService
-      .getAnotherUserArticles(this.userId)
+      .getAnotherUserArticles(this.userId, pageSize, pageIndex)
       .pipe(
         takeUntil(this.unsubscribe$),
         finalize(() => (this.isLoading = false))
       )
       .subscribe({
         next: (res) => {
-          this.userArticles = res.articles;
+          this.userArticles = res.result ?? [];
+          this.totalCount = res.pagination?.totalItems ?? 0;
         },
         error: (err) => {
           this.toastrService.error(
@@ -240,5 +246,14 @@ export class ProfileComponent implements OnInit {
 
   openArticle(id: Guid): void {
     this.router.navigate(['all-articles/post-article', id]);
+  }
+
+  public paginatorEvent(event: PageEvent): void {
+    this.pageIndex = 0;
+   
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+ 
+    this.getUserArticles(event.pageSize, event.pageIndex);
   }
 }

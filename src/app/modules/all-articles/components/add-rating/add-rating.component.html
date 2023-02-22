@@ -8,7 +8,8 @@
                 class="radio-group"
                 [(ngModel)]="indexChosen">
                 <mat-radio-button class="radio-button" *ngFor="let option of options; let i = index;" [value]="i">
-                    {{option}}
+                    <i class="material-icons" style="color: gray" *ngIf="indexChosen < i">star_border</i>
+                    <i class="material-icons" style="color: gold"  *ngIf="indexChosen >= i">star</i>
                 </mat-radio-button>
             </mat-radio-group>
 

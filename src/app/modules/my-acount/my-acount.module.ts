@@ -21,6 +21,9 @@ import { ShowFollowingsComponent } from './profile/show-followings/show-followin
 import { UserFollowComponent } from './profile/user-follow/user-follow.component';
 import { AllArticlesModule } from '../all-articles/all-articles.module';
 import { SentMessageComponent } from './profile/sent-message/sent-message.component';
+import { MatPaginatorModule } from '@angular/material/paginator';
+import { FollowersComponent } from './components/followers/followers.component';
+import { FollowingsComponent } from './components/followings/followings.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +38,8 @@ import { SentMessageComponent } from './profile/sent-message/sent-message.compon
     ShowFollowingsComponent,
     UserFollowComponent,
     SentMessageComponent,
+    FollowersComponent,
+    FollowingsComponent,
   ],
   imports: [
     CommonModule,
@@ -49,6 +54,7 @@ import { SentMessageComponent } from './profile/sent-message/sent-message.compon
     MatDialogModule,
     AppRoutingModule,
     AllArticlesModule,
+    MatPaginatorModule
   ],
 })
 export class MyAcountModule {}

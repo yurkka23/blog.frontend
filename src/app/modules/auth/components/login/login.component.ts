@@ -67,10 +67,7 @@ export class LoginComponent implements OnInit, OnDestroy {
       fjs.parentNode.insertBefore(js, fjs);
     })(document, 'script', 'facebook-jssdk');
 
-    FB.Event.subscribe('auth.authResponseChange', function (response: any) {
-      console.log('auth.authResponseChange');
-      console.log(response);
-    });
+    
   }
 
   loginWithFacebook() {
@@ -87,7 +84,6 @@ export class LoginComponent implements OnInit, OnDestroy {
           FB.api(
             '/me',
             (response: any) => {
-              console.log(response);
               let data: FacebookUserLoginInterface = {
                 id: response.id,
                 email: response.email || null,
@@ -95,7 +91,6 @@ export class LoginComponent implements OnInit, OnDestroy {
                 lastName: response.name.split(' ')[1],
                 avatarUrl: response.picture.data.url || '',
               };
-              console.log(data);
               this.authService
                 .loginWithFacebook(data)
                 .pipe(
@@ -133,18 +128,6 @@ export class LoginComponent implements OnInit, OnDestroy {
       }
       // true //to everytime when login enter password
     );
-  }
-
-  // submitLoginOut() {
-  //   FB.logout((response: any) => {
-  //     console.log(response);
-  //   });
-  // }
-
-  checkStatus(): void {
-    FB.getLoginStatus(function (response: any) {
-      console.log(response);
-    });
   }
 
   closeModal(event: Event): void {

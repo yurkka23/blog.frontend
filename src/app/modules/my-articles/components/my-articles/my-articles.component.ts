@@ -6,6 +6,7 @@ import { MatDialog } from '@angular/material/dialog';
 import { MyArticleComponent } from '../my-article/my-article.component';
 import { CreateArticleComponent } from '../create-article/create-article.component';
 import { ToastrService } from 'ngx-toastr';
+import { PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-my-articles',
@@ -17,6 +18,10 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   myArticles!: GetMyArticleInterface[];
   countArticles: number = 0;
   isLoading: boolean = false;
+  public totalCount!: number;
+  public pageIndex: number = 0;
+  public pageSize: number = 8;
+  public readonly pageSizeOptions: number[] = [8, 16, 32];
   private unsubscribe$: Subject<void> = new Subject<void>();
 
   constructor(private readonly myArticlesService: MyArticlesService, 
@@ -33,16 +38,17 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
     this.unsubscribe$.complete();
   }
 
-  initialazeData(): void{
+  initialazeData(pageSize: number = 8, pageIndex: number = 0): void{
     this.isLoading = true;
-    this.myArticlesService.getMyArticles()
+    this.myArticlesService.getMyArticles(pageSize, pageIndex)
     .pipe(
       takeUntil(this.unsubscribe$),
       finalize(() => this.isLoading = false),
       )
     .subscribe({next: res =>{
-      this.myArticles = res.articles;
-      this.countArticles = res.articles.length;
+      this.totalCount = res.pagination?.totalItems ?? 0;
+      this.myArticles = res.result ?? [];
+      this.countArticles = res.result?.length ?? 0;
     },
     error: err =>{
       this.toastrService.error(err.error, 'Error with getting my articles');
@@ -62,6 +68,18 @@ export class MyArticlesComponent implements OnInit, OnDestroy {
   }
 
   reloadData(): void{
-    this.initialazeData();
+    this.pageSize = 8;
+    this.pageIndex = 0;
+    this.initialazeData(this.pageSize, this.pageIndex);
+  }
+
+  public paginatorEvent(event: PageEvent): void {
+    this.pageIndex = 0;
+   
+    this.pageSize = event.pageSize;
+    this.pageIndex = event.pageIndex;
+
+    this.initialazeData(event.pageSize, event.pageIndex);
+
   }
 }

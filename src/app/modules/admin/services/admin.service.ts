@@ -1,10 +1,13 @@
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Guid } from 'guid-typescript';
-import { Observable } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Roles } from 'src/app/shared/enums/roles.enum';
 import { environment } from 'src/environments/environment';
+import { ArticleInterface } from '../../all-articles/models/Article.interface';
 import { GetArticlesInterface } from '../../all-articles/models/GetArticles.interface';
+import { PaginatedResult } from '../../all-articles/models/PaginatedResult';
+import { getPaginatedResult } from '../../all-articles/services/pagination-helper.service';
 import { ChangeRoleInterface } from '../models/changeRole.interface';
 import { StatisticsInterface } from '../models/statistics.interface';
 import { UsersInterface } from '../models/users.interface';
@@ -17,20 +20,27 @@ export class AdminService {
   
   constructor(private readonly http: HttpClient) { }
 
-  getWaitingArticles(): Observable<GetArticlesInterface>{
+  getWaitingArticles(pageSize: number = 8, pageIndex: number = 0): Observable<PaginatedResult<ArticleInterface[]>>{
     const url = environment.apiUrl + 'article/get-list-of-waiting-articles';
 
-    return this.http.get<GetArticlesInterface>(url);
+    let params = new HttpParams()
+    .append('PageSize', pageSize.toString())
+    .append('PageNumber', pageIndex.toString());
+
+    return getPaginatedResult<ArticleInterface[]>(url, params, this.http);
   }
 
-  searchWaitingArticles(partTitle: string): Observable<GetArticlesInterface>{
+  searchWaitingArticles(partTitle: string, pageSize: number = 8, pageIndex: number = 0): Observable<PaginatedResult<ArticleInterface[]>>{
     const url = environment.apiUrl + 'article/search-waiting-articles-by-title';
     if(partTitle.trim() === ''){
-      return this.getWaitingArticles();
+      return this.getWaitingArticles(pageSize, pageIndex);
     }
-    let params = new HttpParams().append('partTitle', partTitle.toString());
+    let params = new HttpParams().append('PartTitle', partTitle.toString())
+    .append('PageSize', pageSize.toString())
+    .append('PageNumber', pageIndex.toString());
 
-    return this.http.get<GetArticlesInterface>(url, {params});
+    return getPaginatedResult<ArticleInterface[]>(url, params, this.http);
+
   }
 
   verifyArticle(data: VerifyArticleInterface) : Observable<void> {

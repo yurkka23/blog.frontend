@@ -1,0 +1,14 @@
+<div class="wrapper">
+    <div class="no-users" *ngIf="listFollowers.users.length == 0">
+      I don't have followings!
+    </div>
+    <div class="list-users" *ngIf="listFollowers.users.length > 0">
+      <div class="header">My Followings:</div>
+      <app-user-follow
+        *ngFor="let user of listFollowers.users"
+        [userInfo]="user"
+        (click)="showUserProfile(user.id)"
+      >
+      </app-user-follow>
+    </div>
+  </div>

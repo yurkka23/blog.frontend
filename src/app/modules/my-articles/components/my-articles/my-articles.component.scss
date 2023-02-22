@@ -41,4 +41,10 @@ img{
         
     } 
 }
-
+.paginator{
+    display: flex;
+    justify-content: center;
+    background-color: inherit !important;
+    color: rgb(39, 34, 56) !important;
+    font-size: 15px;
+  }

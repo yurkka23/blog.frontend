@@ -1,6 +1,3 @@
-<button mat-raised-button color="primary" (click)="checkStatus()">
-  Check with facebook <mat-icon>facebook</mat-icon>
-</button>
 <div class="all-articles">
   <h3>Top Posts</h3>
   <div class="list-articles">
@@ -37,5 +34,12 @@
       (click)="openArticle(art.id)"
     ></app-article>
   </div>
+  <mat-paginator (page)="paginatorEvent($event)"
+                 [length]="totalCount"
+                 [pageIndex]="pageIndex"
+                 [pageSizeOptions]="pageSizeOptions"
+                 [pageSize]="pageSize"
+                 class="paginator">
+  </mat-paginator>
 </div>
 <app-loading-spinner [isOpen]="isLoading"></app-loading-spinner>
